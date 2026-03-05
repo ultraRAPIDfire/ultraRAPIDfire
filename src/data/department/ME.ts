@@ -8,62 +8,95 @@ export const ME = {
   theme: { accentHex: "#22c55e" },
 
   images: {
-    heroLeft: `${base}/hero-left.jpg`,
-    heroBig: `${base}/hero-big.jpg`,
-    heroSmall1: `${base}/hero-small-1.jpg`,
-    heroSmall2: `${base}/hero-small-2.jpg`,
-    peo: `${base}/peo.jpg`,
+    heroLeft: `${base}/hero-left.png`,
+    heroBig: `${base}/hero-big.png`,
+    heroSmall1: `${base}/hero-small-1.png`,
+    heroSmall2: `${base}/hero-small-2.png`,
+    peo: `${base}/peo.png`,
     watermark: `${base}/watermark.png`,
   },
 
   programOverview: {
     heading: "Program Overview",
-    text: "Edit this Program Overview text for this department.",
-    stats: { nonTeaching: 0, faculty: 0, students: 0 },
+    text: "The Mechanical Engineering program develops strong foundations in thermal sciences, design, manufacturing, and systems integration. Students are prepared for industry practice, licensure, and innovation through theory, laboratory work, and project-based learning.",
+    stats: { nonTeaching: 123, faculty: 123, students: 123 },
   },
 
   peo: {
-    title: "Program Educational Objectives (PEO)",
-    subtitle: "Edit PEO subtitle here.",
-    bullets: ["PEO 1...", "PEO 2...", "PEO 3..."],
+    title: "Program Educational Objectives",
+    subtitle: "Graduates of Mechanical Engineering are expected to demonstrate technical excellence, professional growth, and meaningful societal contribution.",
+    bullets: [
+      "Demonstrate professional competence in the practice and advancement of mechanical engineering.",
+      "Engage in lifelong learning, advanced training, and leadership in multidisciplinary environments.",
+      "Apply engineering solutions ethically and sustainably for national and global development.",
+    ],
   },
 
   so: {
-    title: "Student Outcomes (SO)",
-    subtitle: "Edit SO subtitle here.",
+    title: "Student Outcomes",
+    subtitle: "By graduation, students are expected to show measurable mastery of core engineering knowledge, design capability, and professional responsibility.",
     outcomes: [
-      { title: "SO 1", text: "Description..." },
-      { title: "SO 2", text: "Description..." },
-      { title: "SO 3", text: "Description..." },
+      {
+        title: "Discovery and Planning",
+        text: "Define engineering problems and evaluate constraints using scientific and mathematical principles.",
+      },
+      {
+        title: "Design and Development",
+        text: "Design mechanical systems and processes that satisfy technical, economic, environmental, and safety requirements.",
+      },
+      {
+        title: "Testing and Deployment",
+        text: "Conduct experiments, analyze results, and communicate validated engineering recommendations.",
+      },
     ],
   },
 
   curriculum: {
     title: "Curriculum Overview",
-    text: "Edit curriculum overview paragraph here.",
-    bullets: ["Bullet 1", "Bullet 2", "Bullet 3"],
+    text: "The curriculum integrates engineering sciences, machine design, thermal-fluid systems, manufacturing processes, controls, and capstone design to build industry-ready graduates.",
+    bullets: [
+      "Outcomes-based and board-aligned subject progression",
+      "Strong laboratory and design integration",
+      "Capstone projects with industry and community relevance",
+    ],
   },
 
   laboratories: {
-    title: "Laboratories",
-    items: ["Lab 1", "Lab 2", "Lab 3"],
+    title: "Laboratories and Facilities",
+    items: [
+      "Thermodynamics and Heat Transfer Laboratory",
+      "Fluid Mechanics and Hydraulics Laboratory",
+      "Machine Design and CAD Laboratory",
+    ],
   },
 
   faculty: {
-    title: "Faculty",
+    title: "Faculty and Staff",
     members: [
-      { name: "Engr. Sample Name", role: "Department Chair" },
-      { name: "Engr. Sample Name", role: "Faculty" },
+      { name: "Engr. Juan Dela Cruz", role: "Program Chair" },
+      { name: "Engr. Maria Santos", role: "Faculty - Thermal Sciences" },
     ],
   },
 
   careers: {
     title: "Career Opportunities",
-    subtitle: "Edit careers subtitle here.",
+    subtitle: "Mechanical Engineering graduates can build careers across design, manufacturing, power and energy systems, automation, quality, and operations leadership.",
     cards: [
-      { icon: "💡", title: "Role 1", text: "Description..." },
-      { icon: "⚡", title: "Role 2", text: "Description..." },
-      { icon: "⭐", title: "Role 3", text: "Description..." },
+      {
+        icon: "💡",
+        title: "Design and Product Engineering",
+        text: "Develop and optimize components, machines, and systems for performance and reliability.",
+      },
+      {
+        icon: "⚡",
+        title: "Energy and Thermal Systems",
+        text: "Work on HVAC, power generation, refrigeration, and sustainable energy applications.",
+      },
+      {
+        icon: "⭐",
+        title: "Manufacturing and Operations",
+        text: "Lead production, maintenance, quality assurance, and continuous improvement initiatives.",
+      },
     ],
   },
 };
