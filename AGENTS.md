@@ -64,6 +64,7 @@ Allowed files:
 - `public/data/departments/<CODE>.json`
 - `public/departments/<CODE>/...`
 - `src/Pages/departments/<CODE>.tsx`
+- `src/Pages/admin/<CODE>Admin.tsx`
 
 Forbidden for all `dept/*` branches:
 - Any other department JSON files

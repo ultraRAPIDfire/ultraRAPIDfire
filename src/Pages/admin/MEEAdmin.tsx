@@ -1,5 +1,5 @@
 import { useEffect, useState, type ReactNode } from "react";
-import { Link, Navigate, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
   clearDeptDraft,
   clearDeptOverrides,
@@ -8,36 +8,29 @@ import {
   saveDeptDraft,
   saveDeptOverrides,
   type DepartmentEditableContent,
-} from "../lib/departmentAdmin";
-import {
-  fetchDepartmentData,
-  isDeptCode,
-  type DeptCode,
-} from "../lib/departmentData";
-import type { DepartmentData } from "../types/department";
-import AdminAccessGate from "../components/AdminAccessGate";
-import ResizablePagePreview from "../components/ResizablePagePreview";
+} from "../../lib/departmentAdmin";
+import { fetchDepartmentData } from "../../lib/departmentData";
+import type { DepartmentData } from "../../types/department";
+import AdminAccessGate from "../../components/AdminAccessGate";
+import ResizablePagePreview from "../../components/ResizablePagePreview";
 
-export default function DepartmentAdminPage() {
-  const { deptCode } = useParams();
+const CODE = "MEE" as const;
 
-  const code = (deptCode?.toUpperCase() || "") as DeptCode;
+export default function MEEAdminPage() {
   const [baseDept, setBaseDept] = useState<DepartmentData | null>(null);
   const [form, setForm] = useState<DepartmentEditableContent | null>(null);
   const [status, setStatus] = useState<string>("");
   const [error, setError] = useState<string>("");
 
   useEffect(() => {
-    if (!isDeptCode(code)) return;
-
     let isCancelled = false;
 
     const load = async () => {
       try {
         setError("");
-        const data = await fetchDepartmentData(code);
+        const data = await fetchDepartmentData(CODE);
         const defaults = extractEditableContent(data);
-        const overrides = loadDeptOverrides(code);
+        const overrides = loadDeptOverrides(CODE);
 
         if (!isCancelled) {
           setBaseDept(data);
@@ -60,16 +53,12 @@ export default function DepartmentAdminPage() {
     return () => {
       isCancelled = true;
     };
-  }, [code]);
+  }, []);
 
   useEffect(() => {
-    if (!form || !isDeptCode(code)) return;
-    saveDeptDraft(code, form);
-  }, [code, form]);
-
-  if (!isDeptCode(code)) {
-    return <Navigate to="/departments" replace />;
-  }
+    if (!form) return;
+    saveDeptDraft(CODE, form);
+  }, [form]);
 
   if (error) {
     return (
@@ -88,13 +77,13 @@ export default function DepartmentAdminPage() {
   }
 
   const handleSave = () => {
-    saveDeptOverrides(code, form);
+    saveDeptOverrides(CODE, form);
     setStatus("Saved local admin override for this browser.");
   };
 
   const handleReset = () => {
-    clearDeptOverrides(code);
-    clearDeptDraft(code);
+    clearDeptOverrides(CODE);
+    clearDeptDraft(CODE);
     setForm(extractEditableContent(baseDept));
     setStatus("Reset complete. Local override removed.");
   };
@@ -112,11 +101,11 @@ export default function DepartmentAdminPage() {
     const url = URL.createObjectURL(blob);
     const anchor = document.createElement("a");
     anchor.href = url;
-    anchor.download = `${code}.json`;
+    anchor.download = `${CODE}.json`;
     anchor.click();
     URL.revokeObjectURL(url);
     setStatus(
-      `Downloaded ${code}.json. Commit it to public/data/departments/${code}.json`
+      `Downloaded ${CODE}.json. Commit it to public/data/departments/${CODE}.json`
     );
   };
 
@@ -124,7 +113,7 @@ export default function DepartmentAdminPage() {
     try {
       await navigator.clipboard.writeText(fullJsonText);
       setStatus(
-        `Copied full JSON. Paste into public/data/departments/${code}.json and commit.`
+        `Copied full JSON. Paste into public/data/departments/${CODE}.json and commit.`
       );
     } catch {
       setStatus("Clipboard access failed. Use Download JSON instead.");
@@ -132,7 +121,7 @@ export default function DepartmentAdminPage() {
   };
 
   return (
-    <AdminAccessGate scopeKey={`department-${code}`} title={`${code} Department Admin`}>
+    <AdminAccessGate scopeKey={`department-${CODE}`} title={`${CODE} Department Admin`}>
       {({ logout }) => (
         <div className="min-h-screen bg-gray-100">
           <div className="max-w-[1400px] mx-auto px-6 py-10">
@@ -146,7 +135,7 @@ export default function DepartmentAdminPage() {
             </h1>
             <p className="mt-3 text-sm text-gray-600">
               Edit with forms, then export JSON to commit at
-              <span className="font-mono"> public/data/departments/{code}.json</span>.
+              <span className="font-mono"> public/data/departments/{CODE}.json</span>.
             </p>
 
             <section className="mt-8 rounded-xl border p-5">
@@ -772,7 +761,7 @@ export default function DepartmentAdminPage() {
                 onClick={handleDownloadJson}
                 className="rounded-full border border-gray-400 px-5 py-2 text-sm font-semibold text-gray-800 hover:bg-gray-50"
               >
-                Download {code}.json
+                Download {CODE}.json
               </button>
               <button
                 type="button"
@@ -809,7 +798,7 @@ export default function DepartmentAdminPage() {
               <ResizablePagePreview
                 title="Live Preview"
                 description="This is the actual department page rendered in an iframe. It refreshes automatically while you type."
-                previewUrl={`/dept/${code}?preview=dept`}
+                previewUrl={`/dept/${CODE}?preview=dept`}
                 liveToken={fullJsonText}
               />
             </div>
