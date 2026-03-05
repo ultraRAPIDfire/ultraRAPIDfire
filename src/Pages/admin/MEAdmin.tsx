@@ -18,6 +18,16 @@ import JsonValueEditor from "../../components/JsonValueEditor";
 import ResizablePagePreview from "../../components/ResizablePagePreview";
 
 const code = "ME" as const;
+const imageKeys = [
+  "heroLeft",
+  "heroBig",
+  "heroSmall1",
+  "heroSmall2",
+  "peo",
+  "watermark",
+] as const;
+
+type ImageKey = (typeof imageKeys)[number];
 
 export default function MEAdminPage() {
   const [baseDept, setBaseDept] = useState<DepartmentData | null>(null);
@@ -96,6 +106,35 @@ export default function MEAdminPage() {
     }
   };
 
+  const updateImage = (key: ImageKey, value: string) => {
+    setForm((prev) => {
+      if (!prev) return prev;
+
+      return {
+        ...prev,
+        images: {
+          ...(prev.images ?? {}),
+          [key]: value,
+        },
+      };
+    });
+    setStatus(`Updated images.${key}`);
+  };
+
+  const handleImageUpload = (key: ImageKey, file: File) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const result = typeof reader.result === "string" ? reader.result : "";
+      if (!result) {
+        setStatus(`Upload failed for images.${key}`);
+        return;
+      }
+      updateImage(key, result);
+    };
+    reader.onerror = () => setStatus(`Upload failed for images.${key}`);
+    reader.readAsDataURL(file);
+  };
+
   return (
     <AdminAccessGate scopeKey={`department-${code}`} title={`${code} Department Admin`}>
       {({ logout }) => (
@@ -111,6 +150,48 @@ export default function MEAdminPage() {
               <p className="mt-3 text-sm text-gray-600">
                 Fields are generated from department JSON structure.
               </p>
+
+              <section className="mt-8 rounded-xl border p-5">
+                <h2 className="text-lg font-bold text-gray-900">ME Image Upload</h2>
+                <p className="mt-1 text-xs text-gray-500">
+                  Upload per-image files for this ME page only. Uploaded files are stored as local data URLs in this browser, then included when downloading JSON.
+                </p>
+                <div className="mt-4 grid gap-3 md:grid-cols-2">
+                  {imageKeys.map((key) => {
+                    const currentValue = typeof form.images?.[key] === "string" ? form.images[key] : "";
+                    const filename = currentValue.startsWith("data:") ? "Local upload (data URL)" : currentValue;
+
+                    return (
+                      <div key={key} className="rounded-lg border p-3">
+                        <p className="text-sm font-semibold text-gray-900">images.{key}</p>
+                        <p className="mt-1 text-xs text-gray-500 break-all">{filename || "No value"}</p>
+                        <div className="mt-3 flex flex-wrap gap-2">
+                          <label className="cursor-pointer rounded-full border border-gray-400 px-3 py-1 text-xs font-semibold text-gray-800 hover:bg-gray-50">
+                            Upload
+                            <input
+                              type="file"
+                              accept="image/*"
+                              className="hidden"
+                              onChange={(event) => {
+                                const file = event.target.files?.[0];
+                                if (file) handleImageUpload(key, file);
+                                event.currentTarget.value = "";
+                              }}
+                            />
+                          </label>
+                          <button
+                            type="button"
+                            onClick={() => updateImage(key, baseDept.images[key])}
+                            className="rounded-full border border-gray-400 px-3 py-1 text-xs font-semibold text-gray-800 hover:bg-gray-50"
+                          >
+                            Reset to Default
+                          </button>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </section>
 
               <section className="mt-8 rounded-xl border p-5">
                 <h2 className="text-lg font-bold text-gray-900">Editable Content</h2>
