@@ -6,6 +6,7 @@ import Footer from "../../components/Footer";
 import { mergeDeptWithOverrides } from "../../lib/departmentAdmin";
 import { fetchDepartmentData } from "../../lib/departmentData";
 import type { DepartmentData } from "../../types/department";
+import "../../styles/departments/ME.css";
 
 export default function MEPage() {
   const [baseDept, setBaseDept] = useState<DepartmentData | null>(null);
