@@ -25,7 +25,11 @@ export const MFE = {
   peo: {
     title: "Program Educational Objectives (PEO)",
     subtitle: "Edit PEO subtitle here.",
-    bullets: ["PEO 1...", "PEO 2...", "PEO 3..."],
+    bullets: [
+      "Graduates will demonstrate their manufacturing engineering role in their field of work to cope with the needs and demands of the industry.",
+      "Graduates will pursue lifelong learning through engagement and participation in continued professional development that expands their skills to adapt to the changing needs of the manufacturing engineering profession and community.",
+      "Graduates will engage in community efforts for economic progress and/or environmental conservation/restoration."
+    ],
   },
 
   so: {

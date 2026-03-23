@@ -9,24 +9,14 @@ import "../../styles/departments/MFE.css";
 
 export default function MFEPage() {
   const [baseDept] = useState<typeof MFE>(MFE);
-
-  const dept = useMemo(
-    () => mergeDeptWithOverrides(baseDept),
-    [baseDept]
-  );
+  const dept = useMemo(() => mergeDeptWithOverrides(baseDept), [baseDept]);
 
   useEffect(() => {
     if (!dept) return;
-
     document.title = `${dept.code} | BULSU COE`;
-
-    const link =
-      (document.querySelector("link[rel='icon']") as HTMLLinkElement | null) ??
-      (document.querySelector("link[rel~='icon']") as HTMLLinkElement | null);
-
-    if (link) {
-      link.href = `/icons/${dept.code.toLowerCase()}.svg`;
-    }
+    const link = (document.querySelector("link[rel='icon']") as HTMLLinkElement | null) ??
+                 (document.querySelector("link[rel~='icon']") as HTMLLinkElement | null);
+    if (link) link.href = `/icons/${dept.code.toLowerCase()}.svg`;
   }, [dept]);
 
   const onNav = (id: string) => {
@@ -35,166 +25,383 @@ export default function MFEPage() {
   };
 
   return (
-    <div className="bg-white">
+    <div className="bg-[#fcfcfc] min-h-screen font-sans selection:bg-black selection:text-white overflow-x-hidden">
+      <style>{`
+        @keyframes revealDown { from { opacity: 0; transform: translateY(-15px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-reveal-down { animation: revealDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .blueprint-grid { background-image: radial-gradient(#e5e7eb 1.2px, transparent 1.2px); background-size: 35px 35px; }
+        .glass-panel { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); border: 1px solid rgba(229, 231, 235, 0.8); }
+        .hover-lift { transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+        .hover-lift:hover { transform: translateY(-5px); }
+        @keyframes scanline {
+          0% { transform: translateX(-100%); }
+          100% { transform: translateX(300%); }
+        }
+        @keyframes scanline-v {
+          0% { transform: translateY(-100%); }
+          100% { transform: translateY(200%); }
+        }
+      `}</style>
+
       <Navbar onNav={onNav} />
 
-      <section id="home" className="max-w-6xl mx-auto px-6 pt-10">
-        <div className="text-center">
-          <h1 className="text-3xl md:text-4xl font-extrabold tracking-wide text-gray-900">
-            {dept.title}
-          </h1>
-          <p className="mt-2 text-sm text-gray-500">{dept.subtitle}</p>
-          <div className="mt-5">
-            <Link
-              to={`/dept/${dept.code}/admin`}
-              className="inline-flex items-center rounded-full border border-[#a90000] px-5 py-2 text-sm font-semibold text-[#a90000] hover:bg-[#a90000] hover:text-white"
-            >
-              Open Department Admin
-            </Link>
-          </div>
-        </div>
+      {/* --- home --- */}
+      <section id="home" className="relative mt-16 pb-24 blueprint-grid">
+        <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-white/80 to-[#fcfcfc] pointer-events-none" />
+        
+        <div className="max-w-6xl mx-auto px-6 relative z-10">
+          <div className="flex flex-col lg:flex-row items-center gap-16">
+            <div className="lg:w-1/2 animate-reveal-down text-center lg:text-left relative z-20">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-white border border-slate-200 text-slate-400 text-[9px] font-black tracking-[0.2em] uppercase mb-8 shadow-sm">
+                <span className="w-1.5 h-1.5 rounded-full bg-black animate-pulse" />
+                College of Engineering
+              </div>
+              
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-black tracking-tight leading-none mb-4 uppercase italic">
+                Manufacturing
+              </h1>
+              <h2 className="text-xl md:text-2xl font-light tracking-[0.3em] text-slate-300 uppercase mb-10">
+                Engineering
+              </h2>
 
-        <div className="mt-8 grid grid-cols-12 gap-5">
-          <div className="col-span-12 md:col-span-4">
-            <div className="h-[380px] md:h-[440px] rounded-2xl overflow-hidden bg-gray-200">
-              <img src={dept.images.heroLeft} alt="" className="w-full h-full object-cover" />
-            </div>
-          </div>
-
-          <div className="col-span-12 md:col-span-8 grid grid-cols-12 gap-5">
-            <div className="col-span-12">
-              <div className="h-[220px] md:h-[240px] rounded-2xl overflow-hidden bg-gray-200">
-                <img src={dept.images.heroBig} alt="" className="w-full h-full object-cover" />
+              <p className="text-sm md:text-base text-slate-500 font-medium max-w-md mb-12 leading-relaxed border-l-0 lg:border-l-2 border-black lg:pl-8 italic mx-auto lg:mx-0">
+                {dept.subtitle}
+              </p>
+              
+              <div className="flex flex-wrap justify-center lg:justify-start gap-5">
+                <Link to={`/dept/${dept.code}/admin`} className="px-8 py-4 bg-black text-white rounded-lg font-black text-[10px] uppercase tracking-widest shadow-xl hover:bg-slate-800 hover:-translate-y-1 transition-all active:scale-95">Open Department Admin</Link>
+                <button 
+                  onClick={() => onNav('about')} 
+                  className="relative z-30 px-8 py-4 bg-white border border-slate-200 text-black rounded-lg font-black text-[10px] uppercase tracking-widest hover:border-black hover:bg-slate-50 transition-all shadow-sm cursor-pointer"
+                >
+                  Overview
+                </button>
               </div>
             </div>
 
-            <div className="col-span-12 md:col-span-6">
-              <div className="h-[160px] rounded-2xl overflow-hidden bg-gray-200">
-                <img src={dept.images.heroSmall1} alt="" className="w-full h-full object-cover" />
+            <div className="lg:w-1/2 grid grid-cols-2 gap-6 relative z-10">
+              <div className="space-y-6 pt-12">
+                <div className="group rounded-2xl overflow-hidden shadow-md border-2 border-white hover-lift">
+                  <img src={dept.images.heroLeft} className="w-full h-36 md:h-44 object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700" />
+                </div>
+                <div className="group rounded-2xl overflow-hidden shadow-md border-2 border-white hover-lift">
+                  <img src={dept.images.heroSmall1} className="w-full h-48 md:h-56 object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700" />
+                </div>
               </div>
-            </div>
-
-            <div className="col-span-12 md:col-span-6">
-              <div className="h-[160px] rounded-2xl overflow-hidden bg-gray-200">
-                <img src={dept.images.heroSmall2} alt="" className="w-full h-full object-cover" />
+              <div className="space-y-6">
+                <div className="group rounded-2xl overflow-hidden shadow-md border-2 border-white hover-lift">
+                  <img src={dept.images.heroBig} className="w-full h-64 md:h-72 object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700" />
+                </div>
+                <div className="group rounded-2xl overflow-hidden shadow-md border-2 border-white hover-lift">
+                  <img src={dept.images.heroSmall2} className="w-full h-32 md:h-40 object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700" />
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section id="about" className="max-w-6xl mx-auto px-6 pt-10">
-        <div className="text-left">
-          <div className="text-sm font-semibold text-gray-900">{dept.programOverview.heading}</div>
-          <p className="mt-3 text-sm text-gray-500 leading-relaxed max-w-3xl">{dept.programOverview.text}</p>
-        </div>
-
-        <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-          <Stat value={dept.programOverview.stats.nonTeaching} label="Non-Teaching Personnel" accentHex={dept.theme.accentHex} />
-          <Stat value={dept.programOverview.stats.faculty} label="Faculty" accentHex={dept.theme.accentHex} />
-          <Stat value={dept.programOverview.stats.students} label="Enrolled Students" accentHex={dept.theme.accentHex} />
+      {/* --- stats --- */}
+      <section className="max-w-5xl mx-auto px-6 -mt-12 relative z-20">
+        <div className="glass-panel rounded-3xl p-10 grid grid-cols-1 md:grid-cols-3 gap-10 text-center shadow-[0_20px_50px_rgba(0,0,0,0.05)] border-t border-white">
+          <StatItem value={dept.programOverview.stats.nonTeaching} label="Tech Staff" />
+          <StatItem value={dept.programOverview.stats.faculty} label="Academic Faculty" />
+          <StatItem value={dept.programOverview.stats.students} label="Enrolled Students" />
         </div>
       </section>
 
-      <section id="peo" className="max-w-6xl mx-auto px-6 pt-16">
-        <SectionTitle center eyebrow={dept.title} title={dept.peo.title} subtitle={dept.peo.subtitle} />
+      {/* --- about --- */}
+      <section id="about" className="max-w-6xl mx-auto px-6 py-24">
+         <div className="bg-white rounded-[2.5rem] p-12 border border-slate-100 shadow-sm flex flex-col md:flex-row items-center gap-12">
+            <div className="flex-1">
+               <h3 className="text-xs font-black uppercase tracking-[0.4em] text-slate-300 mb-6">Department Overview</h3>
+               <p className="text-lg md:text-2xl font-black text-black leading-tight italic uppercase tracking-tighter">
+                  {dept.programOverview.text}
+               </p>
+            </div>
+            <div className="w-24 h-24 rounded-full border-[10px] border-slate-50 flex items-center justify-center text-slate-200 font-black italic shrink-0">MFE</div>
+         </div>
+      </section>
 
-        <div className="mt-10 grid grid-cols-12 gap-8 items-start">
-          <div className="col-span-12 md:col-span-6">
-            <div className="rounded-2xl overflow-hidden bg-gray-200">
-              <img src={dept.images.peo} alt="" className="w-full h-[320px] md:h-[360px] object-cover" />
+      {/* --- peo --- */}
+      <section id="peo" className="max-w-6xl mx-auto px-6 py-12 relative overflow-hidden">
+        <div className="absolute top-1/4 -right-20 w-48 h-48 bg-slate-50 rounded-full blur-[80px] -z-10 pointer-events-none opacity-50" />
+
+        <div className="text-center mb-12 group/header cursor-default">
+          <span className="text-[9px] font-bold text-slate-400 uppercase tracking-[0.4em] block mb-2 group-hover/header:text-black transition-colors duration-500">
+            MANUFACTURING ENGINEERING
+          </span>
+          <h2 className="text-xl md:text-3xl font-black text-black uppercase tracking-tight italic leading-none mb-4">
+            Program Educational <span className="text-slate-200 group-hover/header:text-slate-400 transition-colors duration-700">Objectives (PEO)</span>
+          </h2>
+          <div className="flex items-center justify-center gap-3 max-w-lg mx-auto">
+            <div className="h-[1px] w-0 bg-black group-hover/header:w-8 transition-all duration-700" />
+            <p className="text-slate-500 text-[10px] md:text-[11px] font-medium italic">
+              {dept.peo.subtitle}
+            </p>
+            <div className="h-[1px] w-0 bg-black group-hover/header:w-8 transition-all duration-700" />
+          </div>
+        </div>
+
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+          <div className="lg:col-span-4 relative group">
+            <div className="absolute -inset-1 border border-slate-100 rounded-xl -z-10 translate-x-2 translate-y-2 group-hover:translate-x-0 group-hover:translate-y-0 transition-transform duration-700" />
+            <div className="relative rounded-xl overflow-hidden shadow-md border-2 border-white">
+              <img 
+                src={dept.images.peo} 
+                className="w-full h-[300px] md:h-[350px] object-cover grayscale brightness-[1.02] group-hover:grayscale-0 transition-all duration-700" 
+                alt="PEO" 
+              />
             </div>
           </div>
-
-          <div className="col-span-12 md:col-span-6">
-            <div className="space-y-5">
+          
+          <div className="lg:col-span-8 relative pl-0 md:pl-10">
+            <div className="absolute left-0 top-0 w-[1px] h-full bg-slate-100 hidden md:block" />
+            
+            <div className="space-y-3">
               {dept.peo.bullets.map((b, idx) => (
-                <Bullet key={idx} title={`PEO ${idx + 1}`} text={b} />
+                <div 
+                  key={idx} 
+                  className="group relative flex items-start gap-6 p-5 bg-white border border-slate-100 rounded-xl transition-all duration-300 hover:border-black hover:shadow-sm hover:-translate-x-1"
+                >
+                  <div className="hidden md:flex shrink-0 w-2 h-2 rounded-full bg-slate-200 mt-2 -ml-[45px] group-hover:bg-black group-hover:scale-110 transition-all border-2 border-white z-10" />
+                  
+                  <div className="flex-1 px-1">
+                    <div className="flex items-center gap-3 mb-2">
+                      <span className="text-[9px] font-black text-slate-400 group-hover:text-black transition-colors uppercase tracking-[0.2em]">PEO 0{idx + 1}</span>
+                      <div className="h-[1px] w-0 group-hover:w-10 bg-black/10 transition-all duration-500" />
+                    </div>
+
+                    <p className="text-slate-600 group-hover:text-black text-[13px] font-medium leading-relaxed transition-colors">
+                      {b}
+                    </p>
+                  </div>
+                </div>
               ))}
             </div>
           </div>
         </div>
       </section>
 
-      <section id="so" className="max-w-6xl mx-auto px-6 pt-16">
-        <SectionTitle center eyebrow={dept.title} title={dept.so.title} subtitle={dept.so.subtitle} />
-
-        <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
-          {dept.so.outcomes.map((o, idx) => (
-            <OutcomeCard key={idx} title={o.title} text={o.text} />
-          ))}
+      {/* --- so --- */}
+      <section id="so" className="bg-black py-28 rounded-[4rem] mx-4 md:mx-12 my-12 relative overflow-hidden shadow-2xl">
+        <div className="max-w-6xl mx-auto px-8 relative z-10">
+          <div className="mb-20 text-center">
+            <h2 className="text-3xl font-black text-white tracking-tight italic uppercase">Student Outcomes</h2>
+            <p className="text-slate-500 font-black tracking-[0.5em] text-[10px] uppercase mt-4">Competency Framework</p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-8">
+            {dept.so.outcomes.map((o, idx) => (
+              <div key={idx} className="p-10 rounded-[2rem] bg-white/5 border border-white/10 hover:bg-white transition-all duration-500 group cursor-default">
+                <div className="text-5xl font-black text-white/5 group-hover:text-black/5 transition-colors mb-8 italic">SO{idx+1}</div>
+                <h3 className="text-white group-hover:text-black font-black text-xs mb-5 uppercase tracking-widest leading-tight">{o.title}</h3>
+                <p className="text-[11px] text-slate-500 group-hover:text-slate-600 leading-relaxed font-medium">{o.text}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      <section id="curriculum" className="max-w-6xl mx-auto px-6 pt-16">
-        <div className="grid grid-cols-12 gap-8 items-start">
-          <div className="col-span-12 md:col-span-6">
-            <div className="text-xs font-semibold text-gray-400 tracking-wide">TAKE A TOUR</div>
-            <h2 className="mt-2 text-3xl font-extrabold text-gray-900">{dept.curriculum.title}</h2>
-            <p className="mt-3 text-sm text-gray-500 leading-relaxed">{dept.curriculum.text}</p>
+      {/* --- curriculum --- */}
+      <section id="curriculum" className="max-w-6xl mx-auto px-6 py-20">
+        <div className="grid lg:grid-cols-12 gap-8 items-start">
+          <div className="lg:col-span-3">
+            <div className="sticky top-32 flex flex-col items-center lg:items-start">
+              <div className="relative w-40 h-40 md:w-48 md:h-48 rounded-3xl bg-white border border-slate-100 shadow-sm p-6 flex items-center justify-center group hover:border-black transition-all duration-500">
+                <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(#000 0.5px, transparent 0.5px)', backgroundSize: '8px 8px' }} />
+                
+                <img 
+                  src={dept.images.watermark} 
+                  className="w-full h-full object-contain grayscale opacity-20 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700" 
+                  alt="MFE" 
+                />
+                
+                <div className="absolute -bottom-3 -right-3 bg-black text-white text-[7px] font-black px-2 py-1 uppercase tracking-widest rounded-md shadow-lg group-hover:scale-110 transition-transform">
+                  Manufacturing Engineering
+                </div>
+              </div>
 
-            <ul className="mt-6 space-y-3 text-sm text-gray-600">
-              {dept.curriculum.bullets.map((b, idx) => (
-                <li key={idx} className="flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full" style={{ backgroundColor: dept.theme.accentHex }} />
-                  {b}
-                </li>
-              ))}
-            </ul>
+              <div className="mt-8 px-2 hidden lg:block">
+                <span className="text-[9px] font-black text-slate-300 uppercase tracking-[0.4em] block mb-3">Academic Roadmap</span>
+                <p className="text-[11px] text-slate-400 font-medium italic leading-relaxed">
+                  {dept.curriculum.text}
+                </p>
+              </div>
+            </div>
           </div>
 
-          <div className="col-span-12 md:col-span-6">
-            <div className="h-[360px] md:h-[420px] rounded-2xl bg-gray-50 border flex items-center justify-center overflow-hidden">
-              <img src={dept.images.watermark} alt="" className="w-[420px] md:w-[520px] opacity-20 select-none" />
+          <div className="lg:col-span-9">
+            <h2 className="text-2xl md:text-4xl font-black text-black uppercase tracking-tighter italic mb-10 border-b border-slate-100 pb-6">
+              Curriculum Overview
+            </h2>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {dept.curriculum.bullets.map((item, idx) => (
+                <div 
+                  key={idx} 
+                  className="group flex items-center gap-5 p-5 bg-white border border-slate-100 rounded-2xl transition-all duration-300 hover:border-black hover:shadow-xl hover:-translate-y-1"
+                >
+                  <div className="shrink-0 w-9 h-9 rounded-lg bg-slate-50 border border-slate-100 flex items-center justify-center text-[10px] font-black text-slate-400 group-hover:bg-black group-hover:text-white group-hover:border-black transition-all italic">
+                    0{idx + 1}
+                  </div>
+
+                  <p className="text-slate-600 group-hover:text-black text-[13px] font-medium leading-snug transition-colors">
+                    {item}
+                  </p>
+                </div>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
-      <section id="laboratories" className="max-w-6xl mx-auto px-6 pt-16">
-        <SectionTitle center eyebrow={dept.title} title={dept.laboratories.title} subtitle="Department laboratories and learning spaces" />
+      {/* --- laboratories --- */}
+      <section id="laboratories" className="max-w-6xl mx-auto px-6 py-24">
+        <div className="flex flex-col items-center mb-16 text-center animate-reveal-down">
+          <h2 className="text-3xl md:text-5xl font-black text-black uppercase tracking-tighter italic mb-6">
+            {dept.laboratories.title}
+          </h2>
+          <div className="flex items-center gap-4">
+            <div className="h-[1px] w-10 bg-slate-200" />
+            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.4em]">
+              Department laboratories and learning spaces
+            </span>
+            <div className="h-[1px] w-10 bg-slate-200" />
+          </div>
+        </div>
 
-        <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8 justify-center justify-items-center">
           {dept.laboratories.items.map((lab, idx) => (
-            <div key={idx} className="rounded-2xl border bg-white p-6">
-              <div className="text-xs font-semibold text-gray-400">LAB {idx + 1}</div>
-              <h3 className="mt-2 text-base font-bold text-gray-900">{lab}</h3>
+            <div 
+              key={idx} 
+              className="group relative w-full max-w-[280px] bg-white border border-slate-100 rounded-2xl overflow-hidden transition-all duration-500 hover:border-black hover:shadow-xl hover:-translate-y-2"
+            >
+              <div className="relative aspect-[4/3] bg-slate-50 flex items-center justify-center overflow-hidden border-b border-slate-50">
+                <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(#000 0.5px, transparent 0.5px)', backgroundSize: '10px 10px' }} />
+                <img 
+                  src={dept.images.heroSmall1} 
+                  className="w-full h-full object-cover grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700" 
+                  alt={lab} 
+                />
+                <div className="absolute top-4 right-4 text-[7px] font-black text-white bg-black/40 backdrop-blur-md px-2.5 py-1 rounded uppercase tracking-widest">
+                  LAB 0{idx + 1}
+                </div>
+              </div>
+
+              <div className="p-6 text-center">
+                <h3 className="font-black text-slate-900 uppercase italic text-[12px] leading-tight tracking-tight">
+                  {lab}
+                </h3>
+                <div className="mt-4 flex justify-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="w-1.5 h-1.5 rounded-full bg-black animate-pulse" />
+                  <div className="w-1.5 h-1.5 rounded-full bg-slate-200" />
+                  <div className="w-1.5 h-1.5 rounded-full bg-slate-200" />
+                </div>
+              </div>
             </div>
           ))}
         </div>
       </section>
 
-      <section id="faculty" className="max-w-6xl mx-auto px-6 pt-16">
-        <SectionTitle center eyebrow={dept.title} title={dept.faculty.title} />
-
-        <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-5">
+      {/* --- faculty --- */}
+      <section id="faculty" className="max-w-6xl mx-auto px-6 py-28 bg-white border-y border-slate-100">
+        <div className="flex flex-col md:flex-row items-center justify-between mb-20 gap-6">
+          <h2 className="text-3xl md:text-4xl font-black text-black tracking-tight uppercase italic leading-none">FACULTY</h2>
+          <div className="flex items-center gap-4">
+            <div className="h-px w-16 bg-slate-200" />
+            <span className="text-[10px] font-bold text-slate-300 uppercase tracking-widest">Manufacturing Engineering</span>
+          </div>
+        </div>
+        <div className="grid md:grid-cols-3 gap-8">
           {dept.faculty.members.map((member, idx) => (
-            <div key={`${member.name}-${idx}`} className="rounded-2xl border bg-white p-6">
-              <h3 className="font-bold text-gray-900">{member.name}</h3>
-              <p className="mt-1 text-sm text-gray-600">{member.role}</p>
+            <div key={idx} className="group flex items-center gap-8 p-8 rounded-3xl bg-slate-50 border border-slate-100 hover:bg-black hover:border-black transition-all duration-500">
+              <div className="relative shrink-0 w-24 h-24 bg-slate-200 rounded-2xl overflow-hidden border-2 border-white shadow-md group-hover:rotate-2 transition-all">
+                <div className="w-full h-full flex items-center justify-center bg-slate-100 group-hover:bg-slate-200">
+                  <svg className="w-12 h-12 text-slate-300 group-hover:text-black transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                  </svg>
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/10 to-transparent h-1/2 w-full -translate-y-full group-hover:animate-[scanline-v_2s_linear_infinite]" />
+              </div>
+              <div className="flex-1">
+                <h3 className="text-xl font-black text-black group-hover:text-white transition-colors uppercase italic leading-none">{member.name}</h3>
+                <p className="text-[11px] font-bold text-slate-400 group-hover:text-slate-500 uppercase tracking-widest mt-4">{member.role}</p>
+              </div>
             </div>
           ))}
         </div>
       </section>
 
-      <section id="careers" className="max-w-6xl mx-auto px-6 pt-16">
-        <SectionTitle center eyebrow={dept.title} title={dept.careers.title} subtitle={dept.careers.subtitle} />
-
-        <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-5">
+      {/* --- careers --- */}
+      <section id="careers" className="max-w-6xl mx-auto px-6 py-20">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 justify-items-center">
           {dept.careers.cards.map((card, idx) => (
-            <div key={idx} className="rounded-2xl border bg-white p-6 text-center">
-              <div className="text-3xl" aria-hidden="true">{card.icon}</div>
-              <h3 className="mt-4 font-bold text-gray-900">{card.title}</h3>
-              <p className="mt-2 text-sm text-gray-600">{card.text}</p>
+            <div key={idx} className="group relative w-full max-w-[280px] bg-white border border-slate-100 rounded-[2rem] p-10 transition-all duration-500 hover:border-black hover:shadow-2xl">
+              
+              <div className="w-14 h-14 rounded-2xl bg-slate-50 flex items-center justify-center mb-8 group-hover:bg-black transition-all duration-500 group-hover:rotate-[5deg]">
+                <div className="text-slate-300 group-hover:text-white transition-colors">
+                  {idx === 0 && (
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="square">
+                      <rect x="3" y="3" width="10" height="10" />
+                      <rect x="11" y="11" width="10" height="10" strokeDasharray="2 2" />
+                    </svg>
+                  )}
+                  {idx === 1 && (
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="square">
+                      <path d="M4 7h16M4 12h12M4 17h8" />
+                      <circle cx="18" cy="17" r="2" fill="currentColor" />
+                    </svg>
+                  )}
+                  {idx === 2 && (
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="square">
+                      <circle cx="12" cy="12" r="9" />
+                      <path d="M12 3v3m0 12v3M3 12h3m12 0h3" />
+                    </svg>
+                  )}
+                </div>
+              </div>
+
+              <h3 className="text-xs font-black text-black uppercase tracking-[0.2em] mb-3">
+                {card.title}
+              </h3>
+              <p className="text-slate-500 text-[11px] leading-relaxed font-medium">
+                {card.text}
+              </p>
+
+              <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity">
+                <div className="w-1.5 h-1.5 rounded-full bg-black animate-ping" />
+              </div>
             </div>
           ))}
         </div>
       </section>
 
-      <section id="contact" className="max-w-6xl mx-auto px-6 pt-16">
-        <div className="rounded-2xl border bg-gray-50 p-6 md:p-8">
-          <h2 className="text-xl font-bold text-gray-900">Department Contact</h2>
-          <p className="mt-2 text-sm text-gray-600">Add contact details for {dept.title} in this section.</p>
+      {/* --- contact --- */}
+      <section id="contact" className="max-w-4xl mx-auto px-6 py-12">
+        <div className="relative bg-black rounded-[2rem] p-10 md:p-14 text-center overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-700">
+          
+          <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
+              style={{ backgroundImage: 'radial-gradient(#ffffff 0.5px, transparent 0.5px)', backgroundSize: '15px 15px' }} />
+
+          <div className="relative z-10 flex flex-col items-center">
+            <span className="text-[8px] font-black text-slate-500 uppercase tracking-[0.5em] mb-4">
+              Department Contact
+            </span>
+
+            <h2 className="text-2xl md:text-3xl font-black text-white uppercase italic tracking-tighter mb-4">
+              Academic <span className="text-slate-500">Inquiry</span>
+            </h2>
+
+            <p className="text-slate-400 text-[11px] md:text-xs font-medium max-w-sm mx-auto leading-relaxed mb-8 italic">
+              Insert short department contact or coordination placeholder text here.
+            </p>
+
+            <button className="px-10 py-4 bg-white text-black rounded-xl font-black text-[10px] uppercase tracking-widest transition-all hover:bg-slate-100 hover:-translate-y-0.5 active:scale-95 shadow-lg">
+              Send Message
+            </button>
+          </div>
+
+          <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-white group-hover:w-full transition-all duration-1000" />
         </div>
       </section>
 
@@ -203,40 +410,11 @@ export default function MFEPage() {
   );
 }
 
-function Stat({
-  value,
-  label,
-  accentHex,
-}: {
-  value: number;
-  label: string;
-  accentHex: string;
-}) {
+function StatItem({ value, label }: { value: number; label: string }) {
   return (
-    <div>
-      <div className="text-3xl font-extrabold" style={{ color: accentHex }}>
-        {value}
-      </div>
-      <div className="mt-1 text-xs font-semibold text-gray-500">{label}</div>
-    </div>
-  );
-}
-
-function Bullet({ title, text }: { title: string; text: string }) {
-  return (
-    <div>
-      <div className="font-semibold text-gray-900">{title}</div>
-      <div className="mt-1 text-sm text-gray-500">{text}</div>
-    </div>
-  );
-}
-
-function OutcomeCard({ title, text }: { title: string; text: string }) {
-  return (
-    <div className="rounded-2xl border bg-white p-6 text-center">
-      <div className="mx-auto w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center">OK</div>
-      <div className="mt-4 font-semibold text-gray-900">{title}</div>
-      <div className="mt-2 text-sm text-gray-500">{text}</div>
+    <div className="group cursor-default">
+      <div className="text-5xl font-black tracking-tighter italic mb-3 text-black transition-transform group-hover:scale-110 leading-none">{value}</div>
+      <div className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400">{label}</div>
     </div>
   );
 }
