@@ -8,6 +8,14 @@ import {
 } from "../lib/landingAdmin";
 
 type Sections = LandingPageData["sections"];
+type HeroStat = LandingPageData["hero"]["stats"][number];
+
+const heroStatIcons: Record<HeroStat["icon"], typeof Send> = {
+  send: Send,
+  building: Building2,
+  calendar: CalendarDays,
+  users: Users,
+};
 
 function MissionVisionSection({ data }: { data: Sections["missionVision"] }) {
   return (
@@ -207,39 +215,7 @@ export default function LandingPage() {
     return () => window.removeEventListener("storage", onStorage);
   }, [isPreviewMode]);
 
-  const { hero, sections } = data;
-  const navLinks = [
-    { label: "Home", href: "#hero", isRoute: false },
-    { label: "Department", href: "/departments", isRoute: true },
-    { label: "Facilities", href: "#facilities", isRoute: false },
-    { label: "News", href: "#news", isRoute: false },
-  ] as const;
-  const boardPrograms = sections.statistics.departmentStats.filter(
-    (department) => department.hasBoardExam,
-  ).length;
-  const latestBoardCycle = sections.statistics.departmentStats.reduce((latest, department) => {
-    if (!department.hasBoardExam || !("latestExamDate" in department)) return latest;
-
-    const latestExamDate = department.latestExamDate;
-    if (!latestExamDate) return latest;
-
-    const year = Number(latestExamDate.match(/\d{4}/)?.[0] ?? 0);
-    return year > latest ? year : latest;
-  }, 0);
-  const heroStats = [
-    { icon: Send, value: sections.statistics.totalStudents, label: "Current students" },
-    {
-      icon: Building2,
-      value: String(sections.statistics.departmentStats.length),
-      label: "Engineering Departments",
-    },
-    {
-      icon: CalendarDays,
-      value: latestBoardCycle ? String(latestBoardCycle) : "Now",
-      label: "Latest board cycle",
-    },
-    { icon: Users, value: String(boardPrograms), label: "Board exam programs" },
-  ] as const;
+  const { navbar, hero, sections } = data;
 
   return (
     <div className="min-h-screen bg-[#fbf8f4]">
@@ -247,15 +223,15 @@ export default function LandingPage() {
         <div className="mx-auto flex h-20 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
           <Link to="/" className="shrink-0 rounded-full transition-transform duration-300 hover:scale-[1.03]">
             <img
-              src="/COE.svg"
-              alt="Bulacan State University College of Engineering"
+              src={navbar.logoSrc}
+              alt={navbar.logoAlt}
               className="h-12 w-12 object-contain sm:h-14 sm:w-14"
             />
           </Link>
 
           <nav className="hidden flex-1 items-center justify-center md:flex">
             <ul className="flex items-center gap-10 text-[15px] font-medium text-[#8f8b84]">
-              {navLinks.map((link) => (
+              {navbar.links.map((link) => (
                 <li key={link.label}>
                   {link.isRoute ? (
                     <Link
@@ -280,10 +256,10 @@ export default function LandingPage() {
           </nav>
 
           <a
-            href="#contact"
+            href={navbar.contactHref}
             className="inline-flex shrink-0 items-center justify-center rounded-full bg-[#b52a16] px-5 py-2.5 text-sm font-semibold text-white shadow-[0_10px_20px_rgba(181,42,22,0.22)] transition-colors duration-200 hover:bg-[#992211] sm:px-8"
           >
-            Contact
+            {navbar.contactLabel}
           </a>
         </div>
       </header>
@@ -295,12 +271,12 @@ export default function LandingPage() {
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_28%_40%,rgba(167,18,0,0.48),transparent_30%),radial-gradient(circle_at_48%_94%,rgba(255,123,63,0.4),transparent_28%),linear-gradient(125deg,rgba(7,7,7,0.96),rgba(16,9,8,0.88)_45%,rgba(3,3,3,0.98))]" />
               <div
                 className="absolute inset-y-0 left-[-8%] w-[52%] bg-contain bg-left bg-no-repeat opacity-[0.18]"
-                style={{ backgroundImage: "url('/departments/ME/watermark.png')" }}
+                style={{ backgroundImage: `url('${hero.leftWatermarkSrc}')` }}
               />
               <div
                 className="absolute inset-y-0 right-[-6%] w-[44%] bg-contain bg-right bg-no-repeat opacity-[0.12]"
                 style={{
-                  backgroundImage: "url('/departments/ME/watermark.png')",
+                  backgroundImage: `url('${hero.rightWatermarkSrc}')`,
                   transform: "scaleX(-1) rotate(12deg)",
                 }}
               />
@@ -326,17 +302,21 @@ export default function LandingPage() {
             </div>
 
             <div className="grid gap-4 border-t border-[#f1ece4] px-2 py-6 sm:grid-cols-2 lg:grid-cols-4 lg:px-6">
-              {heroStats.map(({ icon: Icon, value, label }) => (
-                <div key={label} className="flex items-start gap-3 rounded-2xl px-3 py-1">
+              {hero.stats.map((item) => {
+                const Icon = heroStatIcons[item.icon];
+
+                return (
+                <div key={item.label} className="flex items-start gap-3 rounded-2xl px-3 py-1">
                   <span className="mt-1 text-[#bcc1cf]">
                     <Icon className="h-5 w-5" strokeWidth={1.8} />
                   </span>
                   <div>
-                    <p className="text-[1.75rem] font-bold leading-none text-[#252525]">{value}</p>
-                    <p className="mt-2 text-sm text-[#8d8d93]">{label}</p>
+                    <p className="text-[1.75rem] font-bold leading-none text-[#252525]">{item.value}</p>
+                    <p className="mt-2 text-sm text-[#8d8d93]">{item.label}</p>
                   </div>
                 </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </section>
