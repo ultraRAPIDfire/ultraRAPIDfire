@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { ChevronLeft, ChevronRight, DraftingCompass, Cpu } from "lucide-react";
-import { CircuitBackground } from "../departments/CPE/Components/CircuitBackground.tsx"
+import { CircuitBackground } from "../../../public/departments/CPE/Components/CircuitBackground";
 // 1. Updated Import
 import CPEnavbar from "../../components/CPEnavbar";
 import SectionTitle from "../../components/SectionTitle";
@@ -16,6 +16,7 @@ export default function CPEPage() {
 
   const dept = useMemo(() => mergeDeptWithOverrides(baseDept), [baseDept]);
   const [activeSoIndex, setActiveSoIndex] = useState(0);
+  const [activeYear, setActiveYear] = useState(0);
 
   const handleNextSo = () => {
     if (activeSoIndex < dept.so.outcomes.length - 1) {
@@ -56,18 +57,17 @@ export default function CPEPage() {
     <div className="bg-white">
       {/* 3. Using the new Component */}
       <CPEnavbar onNav={onNav} />
-
       {/* --- HOME SECTION --- */}
       <section id="home" className="max-w-6xl mx-auto px-6 pt-10">
         <div className="text-center">
-          <h1 className="text-3xl md:text-4xl font-extrabold tracking-wide text-gray-900">
+          <h1 className="text-3xl md:text-4xl font-extrabold tracking-wide text-slate-900 transition-all duration-500 hover:tracking-widest cursor-default">
             {dept.title}
           </h1>
-          <p className="mt-2 text-sm text-gray-500">{dept.subtitle}</p>
+          <p className="mt-2 text-sm text-slate-500">{dept.subtitle}</p>
           <div className="mt-5">
             <Link
               to={`/dept/${dept.code}/admin`}
-              className="inline-flex items-center rounded-full border border-[#a90000] px-5 py-2 text-sm font-semibold text-[#a90000] hover:bg-[#a90000] hover:text-white"
+              className="inline-flex items-center rounded-full border border-blue-600 px-5 py-2 text-sm font-semibold text-blue-600 transition-all duration-300 hover:bg-blue-600 hover:text-white hover:shadow-[0_0_20px_rgba(59,130,246,0.4)] hover:-translate-y-1"
             >
               Open Department Admin
             </Link>
@@ -76,15 +76,17 @@ export default function CPEPage() {
 
         <section className="p-4 md:p-8">
           <div className="mt-8 grid grid-cols-12 gap-5">
-            {/* LEFT CONTENT CARD */}
-            <div className="col-span-12 lg:col-span-5 flex flex-col justify-between p-8 bg-[#F9F6F0] rounded-[2rem] border border-stone-200 shadow-sm">
-              <div>
+            {/* LEFT CONTENT CARD (Floating Dark Tech Panel) */}
+            <div className="col-span-12 lg:col-span-5 flex flex-col justify-between p-8 bg-slate-950 rounded-[2rem] border border-slate-800 relative overflow-hidden transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-[0_30px_60px_-15px_rgba(59,130,246,0.3)] hover:border-blue-500/30 group">
+              {/* Ambient background glow inside the card that intensifies on hover */}
+              <div className="absolute top-0 right-0 w-64 h-64 bg-blue-600/10 blur-[80px] rounded-full pointer-events-none transition-all duration-700 group-hover:bg-blue-500/20 group-hover:scale-125" />
+
+              <div className="relative z-10">
                 <header className="mb-6">
-                  <p className="text-[10px] font-bold tracking-[0.2em] text-red-900 uppercase mb-2">
+                  <p className="text-[10px] font-bold tracking-[0.2em] text-yellow-500 uppercase mb-2">
                     {dept.hero.university}
                   </p>
-                  <h1 className="text-5xl font-black text-slate-900 leading-[0.9] tracking-tighter uppercase">
-                    {/* We use replace to handle the <br /> if needed, or just let it wrap */}
+                  <h1 className="text-5xl font-black text-white leading-[0.9] tracking-tighter uppercase">
                     {dept.title.split(" ").map((word, i) => (
                       <span key={i}>
                         {word} {i === 0 && <br />}
@@ -93,39 +95,43 @@ export default function CPEPage() {
                   </h1>
                 </header>
 
-                <p className="text-slate-600 text-sm leading-relaxed mb-8 max-w-md">
+                <p className="text-slate-300 text-sm leading-relaxed mb-8 max-w-md">
                   {dept.hero.description}
                 </p>
 
                 <div className="flex flex-wrap gap-3 mb-10">
                   <a
                     href={dept.links.explore}
-                    className="px-6 py-2.5 bg-[#7B1616] hover:bg-red-950 text-white rounded-full font-bold text-xs transition-colors text-center"
+                    className="px-6 py-2.5 bg-yellow-500 text-slate-950 rounded-full font-bold text-xs transition-all duration-300 hover:bg-yellow-400 hover:shadow-[0_0_20px_rgba(234,179,8,0.5)] hover:-translate-y-1"
                   >
                     Explore the Program
                   </a>
                   <a
                     href={dept.links.performance}
-                    className="px-6 py-2.5 border border-stone-300 bg-white text-[#7B1616] hover:bg-stone-50 rounded-full font-bold text-xs transition-colors text-center"
+                    className="px-6 py-2.5 border border-slate-700 bg-slate-900/50 text-white rounded-full font-bold text-xs transition-all duration-300 hover:bg-slate-800 hover:border-blue-400 hover:shadow-[0_0_15px_rgba(59,130,246,0.2)] hover:-translate-y-1 backdrop-blur-sm"
                   >
-                    CpE Performance and Extension
+                    CpE Performance & Extension
                   </a>
                 </div>
               </div>
 
               {/* DYNAMIC STATS SECTION */}
-              <div className="grid grid-cols-3 gap-3">
+              <div className="grid grid-cols-3 gap-3 relative z-10">
                 {dept.hero.stats.map((stat, index) => (
                   <div
                     key={index}
-                    className="p-4 bg-white/60 rounded-2xl border border-stone-100"
+                    className="group/stat p-4 bg-slate-900/80 rounded-2xl border border-slate-800/80 backdrop-blur-sm transition-all duration-300 cursor-default hover:-translate-y-1.5 hover:bg-slate-800 hover:border-yellow-500/40 hover:shadow-[0_10px_20px_-5px_rgba(234,179,8,0.15)]"
                   >
                     <span
-                      className={`block text-xl font-black ${stat.highlight ? "text-red-800" : "text-slate-900"}`}
+                      className={`block text-xl font-black transition-transform duration-300 group-hover/stat:scale-110 ${
+                        stat.highlight
+                          ? "text-yellow-400 drop-shadow-[0_0_8px_rgba(234,179,8,0.5)]"
+                          : "text-white"
+                      }`}
                     >
                       {stat.value}
                     </span>
-                    <p className="text-[9px] leading-tight font-bold text-stone-500 uppercase">
+                    <p className="text-[9px] leading-tight font-bold text-slate-400 uppercase tracking-wider mt-1 transition-colors duration-300 group-hover/stat:text-slate-300">
                       {stat.label}
                     </p>
                   </div>
@@ -133,37 +139,45 @@ export default function CPEPage() {
               </div>
             </div>
 
-            {/* RIGHT IMAGE CLUSTER - Now using the 'images' object from TS */}
+            {/* RIGHT IMAGE CLUSTER */}
             <div className="col-span-12 lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-5">
-              <div className="md:col-span-2 h-64 rounded-[2rem] overflow-hidden bg-stone-200">
+              {/* BIG IMAGE */}
+              <div className="group md:col-span-2 h-64 rounded-[2rem] overflow-hidden bg-slate-100 border border-slate-200 relative transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_-10px_rgba(59,130,246,0.2)] hover:border-blue-400/50 cursor-pointer">
+                {/* Subtle color overlay on hover */}
+                <div className="absolute inset-0 bg-blue-600/0 group-hover:bg-blue-600/10 transition-colors duration-500 z-10 pointer-events-none" />
                 <img
                   src={dept.images.heroBig}
                   alt="Hero Big"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
                 />
               </div>
 
-              <div className="h-[400px] rounded-[2rem] overflow-hidden bg-stone-200">
+              {/* LEFT TALL IMAGE */}
+              <div className="group h-[400px] rounded-[2rem] overflow-hidden bg-slate-100 border border-slate-200 relative transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_-10px_rgba(59,130,246,0.2)] hover:border-yellow-400/50 cursor-pointer">
+                <div className="absolute inset-0 bg-yellow-500/0 group-hover:bg-yellow-500/10 transition-colors duration-500 z-10 pointer-events-none" />
                 <img
                   src={dept.images.heroLeft}
                   alt="Hero Left"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
                 />
               </div>
 
+              {/* RIGHT STACKED IMAGES */}
               <div className="flex flex-col gap-5 h-[400px]">
-                <div className="flex-1 rounded-[2rem] overflow-hidden bg-stone-200">
+                <div className="group flex-1 rounded-[2rem] overflow-hidden bg-slate-100 border border-slate-200 relative transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_-10px_rgba(59,130,246,0.2)] hover:border-blue-400/50 cursor-pointer">
+                  <div className="absolute inset-0 bg-blue-600/0 group-hover:bg-blue-600/10 transition-colors duration-500 z-10 pointer-events-none" />
                   <img
                     src={dept.images.heroSmall1}
                     alt="Hero Small 1"
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
                   />
                 </div>
-                <div className="flex-1 rounded-[2rem] overflow-hidden bg-stone-200">
+                <div className="group flex-1 rounded-[2rem] overflow-hidden bg-slate-100 border border-slate-200 relative transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_-10px_rgba(59,130,246,0.2)] hover:border-yellow-400/50 cursor-pointer">
+                  <div className="absolute inset-0 bg-yellow-500/0 group-hover:bg-yellow-500/10 transition-colors duration-500 z-10 pointer-events-none" />
                   <img
                     src={dept.images.heroSmall2}
                     alt="Hero Small 2"
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
                   />
                 </div>
               </div>
@@ -171,7 +185,7 @@ export default function CPEPage() {
           </div>
         </section>
       </section>
-
+      ``
       {/* --- ABOUT SECTION --- */}
       <section
         id="about"
@@ -299,7 +313,6 @@ export default function CPEPage() {
           </div>
         </div>
       </section>
-
       {/* --- PEO SECTION (Sticky Sidebar Layout) --- */}
       <section
         id="peo"
@@ -362,7 +375,6 @@ export default function CPEPage() {
           </div>
         </div>
       </section>
-
       {/* --- SO SECTION (Interactive Tech Flashcards) --- */}
       <section
         id="so"
@@ -514,15 +526,15 @@ export default function CPEPage() {
         id="curriculum"
         className="relative w-full bg-slate-950 py-24 overflow-hidden border-t border-slate-900"
       >
-        {/* 1. Inject the new Circuit Background Here */}
+        {/* The Custom Circuit Background */}
         <CircuitBackground />
 
-        {/* Existing Background glow effect to boost the tech feel */}
+        {/* Ambient Background Glow */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-blue-900/20 blur-[120px] rounded-full pointer-events-none z-0" />
 
-        {/* 2. Ensure content wrapper is relative z-10 */}
-        <div className="relative z-10 max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
-          <div className="md:col-span-6 space-y-6">
+        <div className="relative z-10 max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
+          {/* LEFT COLUMN: Text & Interactive Curriculum Tabs */}
+          <div className="md:col-span-7 space-y-6">
             <div className="text-sm font-bold text-yellow-500 tracking-[0.2em] uppercase drop-shadow-md">
               Take a Tour
             </div>
@@ -533,26 +545,67 @@ export default function CPEPage() {
               {dept.curriculum.text}
             </p>
 
-            <ul className="mt-8 space-y-4 text-sm text-slate-200">
-              {dept.curriculum.bullets.map((b, idx) => (
-                <li
-                  key={idx}
-                  className="group flex items-start gap-4 p-3 rounded-lg bg-slate-950/60 backdrop-blur-sm border border-transparent hover:border-slate-700 transition-all duration-300"
-                >
-                  <div className="relative mt-1 flex h-4 w-4 shrink-0 items-center justify-center">
-                    <span className="absolute h-full w-full rounded-full bg-yellow-500/20 opacity-0 group-hover:opacity-100 group-hover:animate-ping transition-opacity duration-300" />
-                    <span className="relative h-2 w-2 rounded-full bg-yellow-500 shadow-[0_0_8px_rgba(234,179,8,0.8)]" />
-                  </div>
-                  <span className="leading-relaxed group-hover:text-white transition-colors duration-300">
-                    {b}
+            {/* --- INTERACTIVE TABS CONTAINER --- */}
+            <div className="mt-8 bg-slate-900/60 backdrop-blur-md border border-slate-700/50 rounded-2xl overflow-hidden shadow-2xl shadow-blue-900/10">
+              {/* Tab Header / Buttons */}
+              <div className="flex overflow-x-auto border-b border-slate-700/50 scrollbar-hide">
+                {dept.curriculum.yearLevels.map(
+                  (yearLevel: any, idx: number) => (
+                    <button
+                      key={idx}
+                      onClick={() => setActiveYear(idx)}
+                      className={`flex-1 min-w-[100px] py-4 px-4 text-sm font-bold uppercase tracking-wider transition-all duration-300 border-b-2 ${
+                        activeYear === idx
+                          ? "border-yellow-500 text-yellow-400 bg-slate-800/50"
+                          : "border-transparent text-slate-400 hover:text-slate-200 hover:bg-slate-800/30"
+                      }`}
+                    >
+                      {yearLevel.year}
+                    </button>
+                  ),
+                )}
+              </div>
+
+              {/* Tab Content (Subjects List) */}
+              <div className="p-6">
+                <div className="mb-4 flex items-center justify-between">
+                  <h4 className="text-lg font-bold text-white">
+                    {dept.curriculum.yearLevels[activeYear].title}
+                  </h4>
+                  <span className="text-xs font-bold px-3 py-1 rounded-full bg-blue-500/20 text-blue-300 border border-blue-500/30">
+                    Total Units:{" "}
+                    {dept.curriculum.yearLevels[activeYear].totalUnits}
                   </span>
-                </li>
-              ))}
-            </ul>
+                </div>
+
+                <ul className="space-y-3">
+                  {dept.curriculum.yearLevels[activeYear].subjects.map(
+                    (subject: any, sIdx: number) => (
+                      <li
+                        key={sIdx}
+                        className="group flex items-center justify-between p-3 rounded-lg bg-slate-950/40 border border-transparent hover:border-slate-700 transition-colors duration-300"
+                      >
+                        <div className="flex items-center gap-3">
+                          {/* Small Tech Node Bullet */}
+                          <div className="h-1.5 w-1.5 rounded-full bg-yellow-500 shadow-[0_0_5px_rgba(234,179,8,0.8)] group-hover:scale-150 transition-transform duration-300" />
+                          <span className="text-sm font-medium text-slate-300 group-hover:text-white transition-colors duration-300">
+                            {subject.name}
+                          </span>
+                        </div>
+                        <span className="text-xs font-bold text-slate-500 group-hover:text-yellow-500 transition-colors duration-300">
+                          {subject.units} Units
+                        </span>
+                      </li>
+                    ),
+                  )}
+                </ul>
+              </div>
+            </div>
           </div>
 
-          <div className="md:col-span-6">
-            <div className="group relative h-[400px] md:h-[480px] w-full rounded-3xl bg-slate-900/60 border border-blue-500/30 flex items-center justify-center overflow-hidden backdrop-blur-md transition-all duration-500 hover:border-yellow-500/80 hover:bg-slate-900/80 hover:shadow-[0_0_50px_rgba(59,130,246,0.2)] cursor-pointer">
+          {/* RIGHT COLUMN: Interactive Image/Graphic */}
+          <div className="md:col-span-5 sticky top-24">
+            <div className="group relative h-[400px] md:h-[520px] w-full rounded-3xl bg-slate-900/60 border border-blue-500/30 flex items-center justify-center overflow-hidden backdrop-blur-md transition-all duration-500 hover:border-yellow-500/80 hover:bg-slate-900/80 hover:shadow-[0_0_50px_rgba(59,130,246,0.2)] cursor-pointer">
               <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/10 to-yellow-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
               <img
                 src={dept.images.watermark}
@@ -569,9 +622,6 @@ export default function CPEPage() {
         id="laboratories"
         className="relative w-full bg-slate-950 py-24 overflow-hidden border-t border-slate-900"
       >
-        {/* Apply the background here as well to make it continuous */}
-        <CircuitBackground />
-
         <div className="relative z-10 max-w-6xl mx-auto px-6">
           <div className="text-yellow-500 [&_h2]:text-white [&_p]:text-slate-300 bg-slate-950/40 inline-block px-8 py-4 rounded-2xl backdrop-blur-sm border border-slate-800/50 mb-8">
             <SectionTitle
@@ -622,6 +672,7 @@ export default function CPEPage() {
           </div>
         </div>
       </section>
+
       {/* --- FACULTY SECTION --- */}
       <section
         id="faculty"
@@ -695,7 +746,7 @@ export default function CPEPage() {
           ))}
         </div>
       </section>
-
+      
       {/* --- CONTACT SECTION --- */}
       <section id="contact" className="max-w-6xl mx-auto px-6 pt-16">
         <div className="rounded-2xl border bg-gray-50 p-6 md:p-8">
@@ -707,7 +758,6 @@ export default function CPEPage() {
           </p>
         </div>
       </section>
-
       <Footer />
     </div>
   );

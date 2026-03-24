@@ -5,8 +5,6 @@ export const CPE = {
   title: "COMPUTER ENGINEERING",
   subtitle: "Bachelor of Science in Computer Engineering",
 
-
-
   theme: { accentHex: "#2563eb" },
 
   images: {
@@ -41,8 +39,8 @@ export const CPE = {
       { value: "40+", label: "Industry Partners", highlight: false },
       { value: "10", label: "Specialized Labs", highlight: false },
     ],
-    mission: "EDIT ME",
-    vision: "ESIT ME",
+    mission: "To produce competent computer engineers equipped with the knowledge, skills, and values necessary to excel in the global technology landscape through innovative research and community extension.",
+    vision: "A premier hub for Computer Engineering education, recognized for technological innovation and for producing ethically responsible professionals.",
   },
 
   peo: {
@@ -98,17 +96,72 @@ export const CPE = {
   curriculum: {
     title: "Curriculum Overview",
     text: "The BSCpE curriculum at BulSU transitioned to a four-year program in 2018. It is designed to balance general engineering sciences, hardware-software integration, and professional specialization.",
-    bullets: ["Mathematics & Sciences: Calculus (1 & 2), Differential Equations, Physics for Engineers, and Chemistry.",
-       "Core Engineering: Programming Logic & Design, Computer Fundamentals, and Circuits.",
+    
+    // Kept your original bullets just in case you use them elsewhere
+    bullets: [
+        "Mathematics & Sciences: Calculus (1 & 2), Differential Equations, Physics for Engineers, and Chemistry.",
+        "Core Engineering: Programming Logic & Design, Computer Fundamentals, and Circuits.",
         "Major/Professional Courses: Digital Logic Design, Operating Systems, Computer Architecture, Data Communications and Networking, and Microprocessors.",
         "Capstone/Thesis: A significant portion of the final years is dedicated to a design project or undergraduate thesis (similar to your current pork freshness project).",
-      
-      ],  
+    ],
+    
+    // NEW: Interactive Tab Data
+    yearLevels: [
+      {
+        year: "1st Year",
+        title: "Engineering Fundamentals",
+        totalUnits: 23,
+        subjects: [
+          { name: "Calculus 1 & 2", units: 6 },
+          { name: "Chemistry & Physics for Engineers", units: 8 },
+          { name: "Computer Fundamentals & Programming", units: 3 },
+          { name: "Engineering Drawing & CAD", units: 2 },
+          { name: "General Education (Math, Self, NSTP)", units: 4 },
+        ],
+      },
+      {
+        year: "2nd Year",
+        title: "Core Hardware & Logic",
+        totalUnits: 24,
+        subjects: [
+          { name: "Differential Equations & Discrete Math", units: 6 },
+          { name: "Fundamentals of Electronic Circuits", units: 4 },
+          { name: "Object-Oriented Programming", units: 3 },
+          { name: "Logic Circuits and Switching Theory", units: 4 },
+          { name: "Data Structures & Algorithm Analysis", units: 3 },
+          { name: "Engineering Mechanics", units: 4 },
+        ],
+      },
+      {
+        year: "3rd Year",
+        title: "System Integration",
+        totalUnits: 21,
+        subjects: [
+          { name: "Microprocessors & Microcontrollers", units: 4 },
+          { name: "Computer Architecture & Organization", units: 3 },
+          { name: "Data Communications & Networking", units: 4 },
+          { name: "Operating Systems & Software Eng.", units: 6 },
+          { name: "Digital Signal Processing", units: 4 },
+        ],
+      },
+      {
+        year: "4th Year",
+        title: "Specialization & Capstone",
+        totalUnits: 18,
+        subjects: [
+          { name: "Artificial Intelligence & IoT", units: 6 },
+          { name: "Computer Systems Security", units: 3 },
+          { name: "CpE Laws and Professional Ethics", units: 3 },
+          { name: "CpE Practice and Design 1 & 2 (Thesis)", units: 6 },
+        ],
+      },
+    ]
   },
 
   laboratories: {
     title: "Laboratories",
-    items: ["Materials Lab", "Surveying Lab", "Hydraulics Lab"],
+    // Updated to CPE specific labs
+    items: ["CISCO Networking Lab", "Microprocessor & Embedded Systems Lab", "Software Engineering Lab", "Electronics & Logic Circuits Lab"],
   },
 
   faculty: {
@@ -129,17 +182,17 @@ export const CPE = {
       { name: "Engr. Albert C. Cruz Jr.", role: "Part-Time Instructor, Faculty" },
       { name: "Engr. Maria Ana G. Dangan", role: "Guest Lecturer, Faculty" },
       { name: "Engr. Sheila May M. Liwag", role: "Guest Lecturer, Faculty" },
-
     ],
   },
 
   careers: {
     title: "Career Opportunities",
-    subtitle: "EDIT ME: careers subtitle.",
+    subtitle: "Graduates of the BSCpE program are highly sought after in various technology sectors.",
+    // Updated to CPE specific careers
     cards: [
-      { icon: "🏗️", title: "Site Engineer", text: "Description..." },
-      { icon: "📐", title: "Structural Engineer", text: "Description..." },
-      { icon: "🌉", title: "Project Engineer", text: "Description..." },
+      { icon: "💻", title: "Software Engineer", text: "Design, develop, and test software applications, embedded systems, and enterprise solutions." },
+      { icon: "🌐", title: "Network Administrator", text: "Configure, maintain, and secure complex computer networks and IT infrastructures for organizations." },
+      { icon: "🤖", title: "IoT / Embedded Systems Developer", text: "Build and program microcontrollers and smart devices that bridge the gap between hardware and software." },
     ],
   },
 };
