@@ -49,109 +49,127 @@ export default function EEPage() {
     <div className="bg-white">
       <Navbar onNav={onNav} />
 
-      <section id="home" className="max-w-6xl mx-auto px-6 pt-10">
-        <div className="text-center">
-          <h1 className="text-3xl md:text-4xl font-extrabold tracking-wide text-grey-900">
-            {dept.title}
-          </h1>
-          <p className="mt-2 text-sm text-gray-500">{dept.subtitle}</p>
-          <div className="mt-5">
-            <Link
-              to={`/dept/${dept.code}/admin`}
-              className="inline-flex items-center rounded-full border border-[#a90000] px-5 py-2 text-sm font-semibold text-[#a90000] hover:bg-[#a90000] hover:text-white transition-colors"
-            >
-              Open Department Admin
-            </Link>
-          </div>
-        </div>
+      <section id="home" className="max-w-6xl mx-auto px-6 pt-10 pb-16">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-10">
+          
+          <div className="w-full lg:w-5/12 text-center lg:text-left">
+            <div className="space-y-5">
+              <p className="text-[10px] md:text-sm font-bold tracking-[0.4em] md:tracking-[0.6em] uppercase text-red-600 lg:ml-3">
+                College of Engineering
+              </p>
+              
+              <h1 className="text-4xl sm:text-5xl md:text-6xl xl:text-7xl font-black italic tracking-tighter leading-[0.9] lg:leading-[0.85] uppercase">
+                <span className="block text-black">Electrical</span>
+                <span className="inline-block bg-gradient-to-r from-red-700 to-orange-500 bg-clip-text text-transparent lg:pr-8 lg:-mr-8">
+                  Engineering
+                </span>
+              </h1>
+              
+              <div className="pt-2 border-l-4 border-black pl-5 inline-block lg:block text-left">
+                <p className="text-base md:text-lg font-bold text-gray-900 leading-tight uppercase">
+                  Bachelor of Science in <br />
+                  <span className="text-gray-500 font-medium">Electrical Engineering</span>
+                </p>
+              </div>
 
-        <div className="mt-8 grid grid-cols-12 gap-3 md:gap-5">
-          <div className="col-span-12 md:col-span-4">
-            <div className="group aspect-4/5 md:aspect-auto h-auto md:h-135 rounded-2xl overflow-hidden bg-gray-200 shadow-sm transition-all duration-500 hover:shadow-red-500 hover:shadow-[0_0_30px_rgba(169,0,0,0.3)]">
-              <img
-                src={dept.images.heroLeft}
-                alt=""
-                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-              />
-            </div>
-          </div>
-
-          <div className="col-span-12 md:col-span-8 grid grid-cols-12 gap-3 md:gap-5">
-            <div className="col-span-12">
-              <div className="group aspect-video md:aspect-auto h-auto md:h-60 rounded-2xl overflow-hidden bg-gray-200 shadow-sm transition-all duration-500 hover:shadow-red-500 hover:shadow-[0_0_30px_rgba(169,0,0,0.3)]">
-                <img
-                  src={dept.images.heroBig}
-                  alt=""
-                  className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-                />
+              <div className="pt-4">
+                <Link
+                  to={`/dept/${dept.code}/admin`}
+                  className="inline-flex items-center gap-3 bg-black text-white px-8 py-3.5 rounded-full text-xs font-bold uppercase tracking-widest hover:scale-105 hover:bg-red-700 hover:shadow-2xl transition-all shadow-lg active:scale-95"
+                >
+                  Open Department Admin →
+                </Link>
               </div>
             </div>
+          </div>
 
-            <div className="col-span-6">
-              <div className="group aspect-square md:aspect-auto h-auto md:h-70 rounded-2xl overflow-hidden bg-gray-200 shadow-sm transition-all duration-500 hover:shadow-red-500 hover:shadow-[0_0_30px_rgba(169,0,0,0.3)]">
-                <img
-                  src={dept.images.heroSmall1}
-                  alt=""
-                  className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-                />
+          <div className="w-full lg:w-7/12">
+            <div className="grid grid-cols-12 gap-3 aspect-square lg:aspect-auto lg:h-112.5">
+              
+              <div className="col-span-5 h-full">
+                <div className="h-full rounded-2xl md:rounded-3xl overflow-hidden shadow-md border border-gray-100 hover:shadow-red-500 hover:shadow-[0_0_30px_rgba(169,0,0,0.3)]">
+                  <img 
+                    src={dept.images.heroLeft} 
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" 
+                    alt="Pic1" 
+                  />
+                </div>
               </div>
-            </div>
 
-            <div className="col-span-6">
-              <div className="group aspect-square md:aspect-auto h-auto md:h-70 rounded-2xl overflow-hidden bg-gray-200 shadow-sm transition-all duration-500 hover:shadow-red-500 hover:shadow-[0_0_30px_rgba(169,0,0,0.3)]">
-                <img
-                  src={dept.images.heroSmall2}
-                  alt=""
-                  className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-                />
+              <div className="col-span-7 grid grid-rows-2 gap-3 h-full">
+                <div className="row-span-1 rounded-2xl md:rounded-3xl overflow-hidden shadow-md border border-gray-100 hover:shadow-red-500 hover:shadow-[0_0_30px_rgba(169,0,0,0.3)]">
+                  <img 
+                    src={dept.images.heroBig} 
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" 
+                    alt="IIEE" 
+                  />
+                </div>
+
+                <div className="row-span-1 grid grid-cols-2 gap-3">
+                  <div className="rounded-xl md:rounded-2xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-red-500 hover:shadow-[0_0_30px_rgba(169,0,0,0.3)]">
+                    <img 
+                      src={dept.images.heroSmall1} 
+                      className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-500" 
+                      alt="pic3" 
+                    />
+                  </div>
+                  <div className="rounded-xl md:rounded-2xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-red-500 hover:shadow-[0_0_30px_rgba(169,0,0,0.3)]">
+                    <img 
+                      src={dept.images.heroSmall2} 
+                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" 
+                      alt="pic4" 
+                    />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section id="about" className="max-w-6xl mx-auto px-6 pt-10">
-        <div className="text-left">
-          <div className="mt-2 text-xl font-bold text-gray-900">{dept.programOverview.subtitle}</div>
+      <section id="about" className="relative max-w-6xl mx-auto px-6 py-16 overflow-hidden">
+        <div className="absolute inset-0 opacity-[0.03] pointer-events-none -z-10"></div>
 
-          {dept.programOverview.contents.map((c, idx) => (
-            <div key={idx}>
-              <div className="mt-5 text-lg font-semibold text-red-900">{c.heading}</div>
-              <p className="mt-3 text-sm text-gray-500 leading-relaxed max-w-6xl text-justify">{c.text}</p>
+        <div className="relative z-10">
+          <div className="text-left mb-12">
+            <div className="text-2xl md:text-3xl lg:text-4xl font-black uppercase italic bg-gradient-to-r from-red-800 via-red-600 to-orange-500 bg-clip-text text-transparent leading-tight">
+              {dept.programOverview.subtitle}
             </div>
-          ))}
-        </div>
-
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-4">
-          
-          <div className="group relative bg-white p-8 rounded-[2rem] border border-gray-200 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_0_20px_2px_rgba(169,0,0,0.3)] flex flex-col items-center text-center">
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-20 h-1 bg-red-900 rounded-b-full transition-all duration-500 group-hover:w-80 group-hover:rounded-none" />
-            <span className="text-4xl md:text-5xl font-black text-red-900 mb-2 transition-transform duration-500 group-hover:scale-110">
-              {dept.programOverview.stats.nonTeaching}
-            </span>
-            <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-gray-400 group-hover:text-gray-900 transition-colors">
-              Non-Teaching Personnel
-            </span>
+            <div className="mt-3 w-16 h-1 bg-gradient-to-r from-red-800 to-orange-500 rounded-full" />
           </div>
 
-          <div className="group relative bg-white p-8 rounded-[2rem] border border-gray-200 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_0_20px_2px_rgba(169,0,0,0.3)] flex flex-col items-center text-center">
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-20 h-1 bg-red-900 rounded-b-full transition-all duration-500 group-hover:w-80 group-hover:rounded-none" />
-            <span className="text-4xl md:text-5xl font-black text-red-900 mb-2 transition-transform duration-500 group-hover:scale-110">
-              {dept.programOverview.stats.faculty}
-            </span>
-            <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-gray-400 group-hover:text-gray-900 transition-colors">
-              Faculty Members
-            </span>
+          <div className="space-y-12 w-full"> 
+            {dept.programOverview.contents.map((c, idx) => (
+              <div key={idx} className="group relative">
+                <div className="flex flex-col space-y-3">
+                  <div className="text-lg md:text-xl uppercase font-black text-black flex items-center gap-3 tracking-tight">
+                    <span className="text-red-600 font-mono tracking-tighter">//</span>
+                    {c.heading}
+                  </div>
+                  <p className="pl-6 md:pl-10 text-gray-500 leading-relaxed text-left md:text-justify text-sm md:text-lg font-small opacity-90 w-full">
+                    {c.text}
+                  </p>
+                </div>
+              </div>
+            ))}
           </div>
 
-          <div className="group relative bg-white p-8 rounded-[2rem] border border-gray-200 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_0_20px_2px_rgba(169,0,0,0.3)] flex flex-col items-center text-center">
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-20 h-1 bg-red-900 rounded-b-full transition-all duration-500 group-hover:w-80 group-hover:rounded-none" />
-            <span className="text-4xl md:text-5xl font-black text-red-900 mb-2 transition-transform duration-500 group-hover:scale-110">
-              {dept.programOverview.stats.students}
-            </span>
-            <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-gray-400 group-hover:text-gray-900 transition-colors">
-              Enrolled Students
-            </span>
+          <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-4">
+            {[
+              { val: dept.programOverview.stats.nonTeaching, label: "Non-Teaching Personnel" },
+              { val: dept.programOverview.stats.faculty, label: "Faculty Members" },
+              { val: dept.programOverview.stats.students, label: "Enrolled Students" }
+            ].map((stat, i) => (
+              <div key={i} className="group relative bg-white p-6 md:p-8 rounded-[1.5rem] md:rounded-[2rem] border border-gray-200 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_0_20px_2px_rgba(169,0,0,0.3)] flex flex-col items-center text-center">
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-20 h-1 bg-red-900 rounded-b-full transition-all duration-500 group-hover:w-80 group-hover:rounded-none" />
+                <span className="text-3xl md:text-4xl lg:text-5xl font-black bg-gradient-to-r from-red-900 via-red-800 to-orange-700 bg-clip-text text-transparent leading-tight mb-2 transition-transform duration-500 group-hover:scale-110">
+                  {stat.val}
+                </span>
+                <span className="text-[10px] md:text-[11px] font-bold uppercase tracking-[0.2em] text-gray-400 group-hover:text-gray-900 transition-colors">
+                  {stat.label}
+                </span>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -162,7 +180,7 @@ export default function EEPage() {
         <div className="mt-8 md:mt-12 grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center">
         
         <div className="order-2 md:order-1 md:col-span-5 flex justify-center group/logo">
-          <div className="relative p-4 md:p-6 transition-transform duration-700 ease-out group-hover/logo:scale-110">
+          <div className="relative p-6 transition-transform duration-700 ease-out group-hover/logo:scale-105 group-hover/logo:-rotate-2">
             <img 
               src={dept.images.peo} 
               alt="Department Logo" 
