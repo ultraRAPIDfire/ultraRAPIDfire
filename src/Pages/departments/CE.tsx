@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import Navbar from "../../components/navbar";
-import SectionTitle from "../../components/SectionTitle";
-import Footer from "../../components/Footer";
+import Navbar from "../../components/CEnavbar";
+import SectionTitle from "../../components/CEsectiontitle";
+import Footer from "../../components/CEfooter";
 import { mergeDeptWithOverrides } from "../../lib/departmentAdmin";
 import { CE } from "../../data/department/CE";
 import "../../styles/departments/CE.css";
