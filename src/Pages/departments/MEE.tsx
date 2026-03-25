@@ -6,21 +6,7 @@ import Footer from "../../components/Footer";
 import { mergeDeptWithOverrides } from "../../lib/departmentAdmin";
 import { MEE } from "../../data/department/MEE";
 import "../../styles/departments/MEE.css";
-import {
-  Lightbulb,
-  Users,
-  FlaskConical,
-  ShieldCheck,
-  Wrench,
-  MessageSquare,
-  Search,
-  Globe,
-  BookOpen,
-  Scale,
-  Cpu,
-  Briefcase,
-  Cog,
-} from "lucide-react";
+import { Lightbulb, Users, FlaskConical, ShieldCheck, Wrench, MessageSquare, Search, Globe, BookOpen, Scale, Cpu, Briefcase, Cog, } from "lucide-react";
 
 export default function MEEPage() {
   const [baseDept] = useState<typeof MEE>(MEE);
@@ -60,27 +46,20 @@ export default function MEEPage() {
           <div className="mt-5">
             <Link
               to={`/dept/${dept.code}/admin`}
-              className="inline-flex items-center rounded-full border border-[#a90000] px-5 py-2 text-sm font-semibold text-[#a90000] hover:bg-[#a90000] hover:text-white"
-            >
+              className="inline-flex items-center rounded-full border border-[#a90000] px-5 py-2 text-sm font-semibold text-[#a90000] hover:bg-[#a90000] hover:text-white">
               Open Department Admin
             </Link>
           </div>
         </div>
 
-
-
         <div className="mt-8 grid grid-cols-12 gap-5">
-
-          {/* LEFT BIG */}
           <a
             href="https://www.facebook.com/photo?fbid=3604494319879176&set=a.750132340243852"
             target="_blank"
             rel="noopener noreferrer"
             className="block col-span-12 md:col-span-4"
           >
-            <div className="group h-[380px] md:h-[670px] rounded-2xl overflow-hidden bg-gray-200 
-                    transition-all duration-500 ease-out 
-                    hover:-translate-y-2 hover:shadow-2xl cursor-pointer">
+            <div className="group h-[380px] md:h-[670px] rounded-2xl overflow-hidden bg-gray-200 transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl cursor-pointer">
 
               <div className="w-full h-full relative overflow-hidden">
                 <img
@@ -88,12 +67,9 @@ export default function MEEPage() {
                   alt=""
                   className="w-full h-full object-cover 
                      transition-transform duration-700 ease-out 
-                     group-hover:scale-110"
-                />
+                     group-hover:scale-110"/>
 
-                <div className="absolute inset-0 bg-black/10 
-                        opacity-0 group-hover:opacity-100 
-                        transition duration-500"></div>
+                <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition duration-500"></div>
               </div>
             </div>
           </a>
@@ -102,15 +78,11 @@ export default function MEEPage() {
           <div className="col-span-12 md:col-span-8 grid grid-cols-12 gap-5">
 
             {/* TOP BIG */}
-            <a
-              href="https://www.facebook.com/photo/?fbid=1263589322231482&set=a.750132360243850"
+            <a href="https://www.facebook.com/photo/?fbid=1263589322231482&set=a.750132360243850"
               target="_blank"
               rel="noopener noreferrer"
-              className="block col-span-12"
-            >
-              <div className="group h-[300px] rounded-2xl overflow-hidden bg-gray-200 
-                      transition-all duration-500 ease-out 
-                      hover:-translate-y-2 hover:shadow-2xl cursor-pointer">
+              className="block col-span-12">
+              <div className="group h-[300px] rounded-2xl overflow-hidden bg-gray-200 transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl cursor-pointer">
 
                 <div className="w-full h-full relative overflow-hidden">
                   <img
@@ -118,8 +90,7 @@ export default function MEEPage() {
                     alt=""
                     className="w-full h-full object-cover 
                        transition-transform duration-700 ease-out 
-                       group-hover:scale-110"
-                  />
+                       group-hover:scale-110"/>
                   <div className="absolute inset-0 bg-black/10 
                           opacity-0 group-hover:opacity-100 
                           transition duration-500"></div>
@@ -127,8 +98,6 @@ export default function MEEPage() {
               </div>
             </a>
 
-
-            {/* SMALL 1 */}
             <a
               href="https://www.facebook.com/AIMEESBulSU/posts/pfbid0QBMLNdvqEusEnLRtnMp6d5jxH2NGUHKFcPr7BGNu2ii6W3wUGATKcNa4po2ScTZQl?rdid=HBuJMuAqSMrBdxxk#"
               target="_blank"
@@ -154,8 +123,6 @@ export default function MEEPage() {
               </div>
             </a>
 
-
-            {/* SMALL 2 */}
             <a
               href="https://www.facebook.com/AIMEESBulSU/posts/pfbid02ijHers3CGTgvyKqmZkGb1X7XDtdX6uhnTX3J8hCWgEYbuXzUhY2eGnktoXpjJUaHl?rdid=MeGMAnY0orEaeqMi#"
               target="_blank"
@@ -172,8 +139,7 @@ export default function MEEPage() {
                     alt=""
                     className="w-full h-full object-cover 
                        transition-transform duration-700 ease-out 
-                       group-hover:scale-110"
-                  />
+                       group-hover:scale-110"/>
                   <div className="absolute inset-0 bg-black/10 
                           opacity-0 group-hover:opacity-100 
                           transition duration-500"></div>
@@ -200,24 +166,21 @@ export default function MEEPage() {
             <Stat
               value={dept.programOverview.stats.nonTeaching}
               label="Non-Teaching Personnel"
-              accentHex={dept.theme.accentHex}
-            />
+              accentHex={dept.theme.accentHex} />
           </div>
 
           <div className="scale-150">
             <Stat
               value={dept.programOverview.stats.faculty}
               label="Faculty"
-              accentHex={dept.theme.accentHex}
-            />
+              accentHex={dept.theme.accentHex} />
           </div>
 
           <div className="scale-150">
             <Stat
               value={dept.programOverview.stats.students}
               label="Enrolled Students"
-              accentHex={dept.theme.accentHex}
-            />
+              accentHex={dept.theme.accentHex} />
           </div>
         </div>
       </section>
@@ -227,10 +190,9 @@ export default function MEEPage() {
           center
           eyebrow={dept.title}
           title={dept.peo.title}
-          subtitle={dept.peo.subtitle}
-        />
+          subtitle={dept.peo.subtitle} />
 
-<div className="mt-10 grid grid-cols-12 gap-8 items-start">
+        <div className="mt-10 grid grid-cols-12 gap-8 items-start">
 
   {/* IMAGE */}
   <div className="col-span-12 md:col-span-6 overflow-hidden">
@@ -242,8 +204,8 @@ export default function MEEPage() {
         className="w-full h-full object-contain p-6"
       />
 
-    </div>
-  </div>
+            </div>
+          </div>
 
   {/* TEXT */}
   <div className="col-span-12 md:col-span-6 min-w-0">
@@ -256,17 +218,15 @@ export default function MEEPage() {
             PEO {idx + 1}
           </h4>
 
-          <p className="mt-2 text-gray-600 leading-relaxed text-justify break-words">
-            {b}
-          </p>
+                  <p className="mt-2 text-gray-600 leading-relaxed text-justify break-words">
+                    {b}
+                  </p>
+                </div>
+              ))}
 
+            </div>
+          </div>
         </div>
-      ))}
-
-    </div>
-  </div>
-
-</div>
       </section>
 
       <section id="so" className="mt-10 max-w-6xl mx-auto px-6 pt-16">
@@ -274,8 +234,7 @@ export default function MEEPage() {
           center
           eyebrow={dept.title}
           title={dept.so.title}
-          subtitle={dept.so.subtitle}
-        />
+          subtitle={dept.so.subtitle} />
 
         <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
           {dept.so.outcomes.map((o, idx) => (
@@ -283,8 +242,7 @@ export default function MEEPage() {
               key={idx}
               title={o.title}
               text={o.text}
-              icon={outcomeIcons[idx]}
-            />
+              icon={outcomeIcons[idx]} />
           ))}
         </div>
       </section>
@@ -322,8 +280,7 @@ export default function MEEPage() {
               <img
                 src={dept.images.watermark}
                 alt=""
-                className="w-[80%] md:w-[80%] object-contain select-none"
-              />
+                className="w-[80%] md:w-[80%] object-contain select-none" />
             </div>
           </div>
         </div>
@@ -332,11 +289,10 @@ export default function MEEPage() {
           {dept.curriculum.years.map((year, idx) => (
             <div
               key={idx}
-              className="group relative rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">  
+              className="group relative rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
               <div
                 className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-300 rounded-2xl"
-                style={{ backgroundColor: "#1c638b" }}
-              />
+                style={{ backgroundColor: "#1c638b" }} />
 
               <div className="relative z-10">
                 <div className="flex items-center justify-between">
@@ -379,8 +335,7 @@ export default function MEEPage() {
           center
           eyebrow={dept.title}
           title={dept.laboratories.title}
-          subtitle="Department laboratories and learning spaces"
-        />
+          subtitle="Department laboratories and learning spaces" />
 
         <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {dept.laboratories.items.map((lab, idx) => (
@@ -416,7 +371,7 @@ export default function MEEPage() {
               </div>
 
               <div className="p-5 text-center transition-colors duration-300 group-hover:bg-[#1c638b]">
-                <h3 className="text-base font-bold uppercase leading-snug text-[#1c638b] transition-colors duration-300 group-hover:text-white">
+                <h3 className="text-base font-bold uppercase leading-snug text-gray-900 transition-colors duration-300 group-hover:text-white">
                   {member.name}
                 </h3>
 
@@ -431,8 +386,6 @@ export default function MEEPage() {
         </div>
       </section>
 
-
-
       <section id="careers" className="mt-10 max-w-6xl mx-auto px-6 pt-16">
         <SectionTitle
           center
@@ -442,42 +395,51 @@ export default function MEEPage() {
         />
 
         <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
-  {dept.careers.cards.map((card, idx) => {
-    const Icon = careerIcons[idx];
+          {dept.careers.cards.map((card, idx) => {
+            const Icon = careerIcons[idx];
 
-    return (
-      <div
-        key={idx}
-        className="group rounded-2xl border-2 border-[#1c638b]/20 bg-[#e8eff3] p-6 text-center transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_15px_30px_rgba(28,99,139,0.25)] hover:bg-[#1c638b] hover:border-[#1c638b]"
-      >
-        {/* ICON */}
-        <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-[#1c638b]/10 group-hover:bg-white/20 transition">
-          <Icon className="h-6 w-6 text-[#1c638b] group-hover:text-white" />
+            return (
+              <div
+                key={idx}
+                className="group rounded-2xl border-2 border-[#1c638b]/20 bg-[#e8eff3] p-6 text-center transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_15px_30px_rgba(28,99,139,0.25)] hover:bg-[#1c638b] hover:border-[#1c638b]">
+                <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-[#1c638b]/10 group-hover:bg-white/20 transition">
+                  <Icon className="h-6 w-6 text-[#1c638b] group-hover:text-white" />
+                </div>
+                <h3 className="mt-2 font-bold text-gray-900 group-hover:text-white transition">
+                  {card.title}
+                </h3>
+                <p className="mt-2 text-sm text-gray-700 leading-relaxed text-justify group-hover:text-white/90 transition">
+                  {card.text}
+                </p>
+              </div>
+            );
+          })}
         </div>
-
-        {/* TITLE */}
-        <h3 className="mt-2 font-bold text-gray-900 group-hover:text-white transition">
-          {card.title}
-        </h3>
-
-        {/* TEXT */}
-        <p className="mt-2 text-sm text-gray-700 leading-relaxed text-justify group-hover:text-white/90 transition">
-          {card.text}
-        </p>
-      </div>
-    );
-  })}
-</div>
       </section>
 
       <section id="contact" className="max-w-6xl mx-auto px-6 pt-16">
         <div className="rounded-2xl border bg-gray-50 p-6 md:p-8">
-          <h2 className="text-xl font-bold text-gray-900">
+          <h2 className="text-2xl font-bold text-gray-900">
             Department Contact
           </h2>
-          <p className="mt-2 text-sm text-gray-600">
-            Add contact details for {dept.title} in this section.
+          <p className="mt-7 text-xl text-gray-900 font-bold">
+            Engr. Arvin Julius Tullao
           </p>
+          <p className="mt-1 text-sm text-gray-500 font-semibold">
+            DEPARTMENT HEAD
+          </p>
+          <div className="mt-7 flex items-center gap-3">
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#1c638b]/10">
+              <MessageSquare className="h-5 w-5 text-[#1c638b]" />
+            </div>
+            <a
+              href="mailto:arvinjulius.tullao@bulsu.edu.ph"
+              className="text-lg text-gray-700 font-semibold hover:text-[#1c638b] transition"
+            >
+              arvinjulius.tullao@bulsu.edu.ph
+            </a>
+          </div>
+
         </div>
       </section>
 
@@ -519,14 +481,18 @@ function Bullet({ title, text }: { title: string; text: string }) {
 }
 
 const outcomeIcons = [
-  Lightbulb, Users, FlaskConical, ShieldCheck, Wrench, MessageSquare, Search, Globe, BookOpen, Scale, Cpu, Briefcase, Cog, 
+  Lightbulb, Users, FlaskConical, ShieldCheck, Wrench, Scale, MessageSquare, Globe, BookOpen, Scale, Cpu, Briefcase, Cog,
 ];
 
 const careerIcons = [
   Cpu, Cog, Wrench,
 ];
 
-  function OutcomeCard({
+const contactIcons = [
+  MessageSquare
+];
+
+function OutcomeCard({
   title,
   text,
   icon: Icon,
