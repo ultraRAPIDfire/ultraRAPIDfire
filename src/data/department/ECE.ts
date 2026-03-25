@@ -1,11 +1,3 @@
-import { 
-  Wifi, Cpu, Network, TowerControl, Plane, 
-  Orbit, Compass, ShieldAlert, Bot, BrainCircuit, 
-  ShieldCheck, Zap, Activity, ShoppingCart, Lightbulb, 
-  Landmark, Construction, Gauge, Gavel, Briefcase, 
-  Search, GraduationCap 
-} from 'lucide-react';
-
 const base = "/departments/ECE";
 
 const facultyMembers = [
@@ -265,9 +257,22 @@ export const ECE = {
     ]
   },
   laboratories: {
-    title: "Laboratories",
-    items: ["Microprocessors Lab", "Communication Systems Lab", "Electronics Circuits Lab"],
-  },
+  title: "Laboratories",
+  items: [
+    { 
+      name: "Microprocessors Lab", 
+      image: `${base}/watermark.png`
+    },
+    { 
+      name: "Communication Systems Lab", 
+      image: `${base}/watermark.png`
+    },
+    { 
+      name: "Electronics Circuits Lab", 
+      image: `${base}/watermark.png`
+    },
+  ],
+},
 
   faculty: {
     title: "Faculty",
@@ -284,28 +289,28 @@ export const ECE = {
     title: "Career Opportunities",
     subtitle: "The versatility of Electronics Engineering allows graduates to pursue diverse career paths.",
     cards: [
-      { icon: Wifi, title: "Telecommunications", text: "Designing and maintaining wireless networks, fiber optics, and satellite communication systems." },
-      { icon: Cpu, title: "Semiconductor Industry", text: "Developing microchips and integrated circuits (ICs) used in almost all modern electronics." },
-      { icon: Network, title: "Information and Communications Technology (ICT)", text: "Managing the hardware and networking infrastructure that keeps businesses and data centers running." },
-      { icon: TowerControl, title: "Broadcasting Industry", text: "Engineering the transmission systems for radio, television, and digital streaming media." },
-      { icon: Plane, title: "Aeronautics", text: "Specializing in the electronic flight control systems and 'avionics' inside aircraft." },
-      { icon: Orbit, title: "Space Engineering", text: "Developing radiation-hardened circuitry and communication arrays for satellites." },
-      { icon: Compass, title: "Navigation", text: "Designing GPS, radar, and sonar systems for maritime and land-based positioning." },
-      { icon: ShieldAlert, title: "Military", text: "Creating secure communication hardware and advanced defense weaponry." },
-      { icon: Bot, title: "Robotics and Automation", text: "Building smart machines and assembly lines for manufacturing." },
-      { icon: BrainCircuit, title: "Artificial Intelligence", text: "Designing specialized hardware and edge-computing devices for neural networks." },
-      { icon: ShieldCheck, title: "Cybersecurity", text: "Protecting hardware and embedded systems from physical and remote intrusions." },
-      { icon: Zap, title: "Power Electronics", text: "Converting and controlling electrical power for electric vehicles and solar inverters." },
-      { icon: Activity, title: "Biomedical Electronics", text: "Designing life-saving medical devices like pacemakers and MRI machines." },
-      { icon: ShoppingCart, title: "Marketing and Sales", text: "Bridging the gap between complex hardware products and client needs." },
-      { icon: Lightbulb, title: "Technopreneurs", text: "Starting technology-based businesses or launching innovative hardware products." },
-      { icon: Landmark, title: "Banking and Finance", text: "Applying analytical skills to technical risk assessment for tech investments." },
-      { icon: Construction, title: "Construction (Sign & Seal)", text: "Designing and certifying auxiliary and safety systems for large buildings." },
-      { icon: Gauge, title: "Instrumentation & Control", text: "Managing the sensors and feedback loops that regulate industrial plants." },
-      { icon: Gavel, title: "Government", text: "Regulating telecommunications standards or working in science departments." },
-      { icon: Briefcase, title: "Management", text: "Leading engineering teams and overseeing technical project lifecycles." },
-      { icon: Search, title: "Research", text: "Discovering new materials or methods to push the boundaries of physics." },
-      { icon: GraduationCap, title: "Academe", text: "Educating the next generation of engineers as a professor or researcher." },
+      { icon: "🌐", title: "Telecommunications", text: "Designing and maintaining wireless networks, fiber optics, and satellite communication systems." },
+      { icon: "📟", title: "Semiconductor Industry", text: "Developing microchips and integrated circuits (ICs) used in almost all modern electronics." },
+      { icon: "🖥️", title: "Information and Communications Technology (ICT)", text: "Managing the hardware and networking infrastructure that keeps businesses and data centers running." },
+      { icon: "📡", title: "Broadcasting Industry", text: "Engineering the transmission systems for radio, television, and digital streaming media." },
+      { icon: "✈️", title: "Aeronautics", text: "Specializing in the electronic flight control systems and 'avionics' inside aircraft." },
+      { icon: "🛰️", title: "Space Engineering", text: "Developing radiation-hardened circuitry and communication arrays for satellites." },
+      { icon: "🧭", title: "Navigation", text: "Designing GPS, radar, and sonar systems for maritime and land-based positioning." },
+      { icon: "🎖️", title: "Military", text: "Creating secure communication hardware and advanced defense weaponry." },
+      { icon: "🤖", title: "Robotics and Automation", text: "Building smart machines and assembly lines for manufacturing." },
+      { icon: "🧠", title: "Artificial Intelligence", text: "Designing specialized hardware and edge-computing devices for neural networks." },
+      { icon: "🛡️", title: "Cybersecurity", text: "Protecting hardware and embedded systems from physical and remote intrusions." },
+      { icon: "⚡", title: "Power Electronics", text: "Converting and controlling electrical power for electric vehicles and solar inverters." },
+      { icon: "🏥", title: "Biomedical Electronics", text: "Designing life-saving medical devices like pacemakers and MRI machines." },
+      { icon: "📈", title: "Marketing and Sales", text: "Bridging the gap between complex hardware products and client needs." },
+      { icon: "💡", title: "Technopreneurs", text: "Starting technology-based businesses or launching innovative hardware products." },
+      { icon: "🏦", title: "Banking and Finance", text: "Applying analytical skills to technical risk assessment for tech investments." },
+      { icon: "🏗️", title: "Construction (Sign & Seal)", text: "Designing and certifying auxiliary and safety systems for large buildings." },
+      { icon: "🕹️", title: "Instrumentation & Control", text: "Managing the sensors and feedback loops that regulate industrial plants." },
+      { icon: "⚖️", title: "Government", text: "Regulating telecommunications standards or working in science departments." },
+      { icon: "💼", title: "Management", text: "Leading engineering teams and overseeing technical project lifecycles." },
+      { icon: "🔍", title: "Research", text: "Discovering new materials or methods to push the boundaries of physics." },
+      { icon: "🎓", title: "Academe", text: "Educating the next generation of engineers as a professor or researcher." },
     ],
   },
 };

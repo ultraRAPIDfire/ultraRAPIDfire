@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../../components/navbar";
 import SectionTitle from "../../components/eceSectionTitle";
@@ -32,13 +32,21 @@ export default function ECEPage() {
 
   const totalPages = pages.length;
 
-  const nextSlide = () => {
+  const nextSlide = useCallback(() => {
     setCurrentIndex((prev) => (prev + 1) % totalPages);
-  };
+  }, [totalPages]);
 
   const prevSlide = () => {
     setCurrentIndex((prev) => (prev - 1 + totalPages) % totalPages);
   };
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      nextSlide();
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [nextSlide]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -89,11 +97,11 @@ export default function ECEPage() {
           </div>
         </div>
 
-        <div className="mt-8 grid grid-cols-12 gap-5">
-          <div className="col-span-12 md:col-span-4">
-            <div className="group relative h-[400px] md:h-[460px] p-[2px] rounded-2xl overflow-hidden transition-all duration-500 hover:scale-[1.02] hover:shadow-[0_0_25px_rgba(139,101,207,0.3)]">
+        <div className="mt-8 grid grid-cols-12 gap-3 md:gap-5">
+          <div className="col-span-12 md:col-span-4 order-1">
+            <div className="group relative h-[350px] md:h-[460px] p-[2px] rounded-2xl overflow-hidden transition-all duration-500 hover:scale-[1.02] hover:shadow-[0_0_25px_rgba(139,101,207,0.3)] bg-gray-200">
               <div className="absolute inset-[-150%] bg-[conic-gradient(transparent,transparent,#8B65CF,#2B1C50,transparent)] animate-[spin_4s_linear_infinite] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="relative z-10 w-full h-full rounded-[14px] overflow-hidden bg-gray-200">
+              <div className="relative z-10 w-full h-full rounded-[14px] overflow-hidden">
                 <img
                   src={dept.images.heroLeft}
                   alt=""
@@ -103,11 +111,11 @@ export default function ECEPage() {
             </div>
           </div>
 
-          <div className="col-span-12 md:col-span-8 grid grid-cols-12 gap-5">
+          <div className="col-span-12 md:col-span-8 order-2 grid grid-cols-12 gap-3 md:gap-5">
             <div className="col-span-12">
-              <div className="group relative h-[220px] md:h-[240px] p-[2px] rounded-2xl overflow-hidden transition-all duration-500 hover:shadow-[0_20px_40px_-12px_#8B65CF]">
+              <div className="group relative h-[200px] md:h-[240px] p-[2px] rounded-2xl overflow-hidden transition-all duration-500 hover:shadow-[0_20px_40px_-12px_#8B65CF] bg-gray-200">
                 <div className="absolute inset-[-150%] bg-[conic-gradient(transparent,transparent,#8B65CF,#2B1C50,transparent)] animate-[spin_4s_linear_infinite] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <div className="relative z-10 w-full h-full rounded-[14px] overflow-hidden bg-gray-200">
+                <div className="relative z-10 w-full h-full rounded-[14px] overflow-hidden">
                   <img
                     src={dept.images.heroBig}
                     alt=""
@@ -117,10 +125,10 @@ export default function ECEPage() {
               </div>
             </div>
 
-            <div className="col-span-12 md:col-span-6">
-              <div className="group relative h-[200px] p-[2px] rounded-2xl overflow-hidden transition-all duration-500 hover:scale-[1.02] hover:shadow-[0_0_25px_rgba(139,101,207,0.3)]">
+            <div className="col-span-6">
+              <div className="group relative h-[150px] md:h-[200px] p-[2px] rounded-2xl overflow-hidden transition-all duration-500 hover:scale-[1.02] hover:shadow-[0_0_25px_rgba(139,101,207,0.3)] bg-gray-200">
                 <div className="absolute inset-[-150%] bg-[conic-gradient(transparent,transparent,#8B65CF,#2B1C50,transparent)] animate-[spin_4s_linear_infinite] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <div className="relative z-10 w-full h-full rounded-[14px] overflow-hidden bg-gray-200">
+                <div className="relative z-10 w-full h-full rounded-[14px] overflow-hidden">
                   <img
                     src={dept.images.heroSmall1}
                     alt=""
@@ -130,10 +138,10 @@ export default function ECEPage() {
               </div>
             </div>
 
-            <div className="col-span-12 md:col-span-6">
-              <div className="group relative h-[200px] p-[2px] rounded-2xl overflow-hidden transition-all duration-500 hover:scale-[1.02] hover:shadow-[0_0_25px_rgba(139,101,207,0.3)]">
+            <div className="col-span-6">
+              <div className="group relative h-[150px] md:h-[200px] p-[2px] rounded-2xl overflow-hidden transition-all duration-500 hover:scale-[1.02] hover:shadow-[0_0_25px_rgba(139,101,207,0.3)] bg-gray-200">
                 <div className="absolute inset-[-150%] bg-[conic-gradient(transparent,transparent,#8B65CF,#2B1C50,transparent)] animate-[spin_4s_linear_infinite] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <div className="relative z-10 w-full h-full rounded-[14px] overflow-hidden bg-gray-200">
+                <div className="relative z-10 w-full h-full rounded-[14px] overflow-hidden">
                   <img
                     src={dept.images.heroSmall2}
                     alt=""
@@ -148,42 +156,62 @@ export default function ECEPage() {
 
       <section id="about" className="max-w-6xl mx-auto px-6 pt-10">
         <div className="text-left">
-          <div className="mt-2 text-3xl md:text-4xl font-black uppercase italic bg-gradient-to-r from-[#2B1C50] via-[#5A418E] to-[#8B65CF] bg-clip-text text-transparent leading-tight">
+          <div className="mt-2 text-xl md:text-3xl font-black uppercase italic bg-gradient-to-r from-[#2B1C50] via-[#5A418E] to-[#8B65CF] bg-clip-text text-transparent leading-tight">
             {dept.programOverview.heading}
           </div>
-          <p className="mt-3 text-l text-gray-500 leading-relaxed max-w-5xl text-justify">
+          <p className="mt-2 text-[10px] md:text-base text-gray-500 leading-relaxed max-w-5xl text-justify">
             {dept.programOverview.text}
           </p>
         </div>
 
-        <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+        <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-6 text-center">
           {[
             {
               value: dept.programOverview.stats.nonTeaching,
               label: "NON-TEACHING PERSONNEL",
             },
-            { value: dept.programOverview.stats.faculty, label: "FACULTY" },
+            {
+              value: dept.programOverview.stats.faculty,
+              label: "FACULTY",
+              isLink: true,
+            },
             {
               value: dept.programOverview.stats.students,
               label: "ENROLLED STUDENTS",
             },
-          ].map((stat, i) => (
-            <div
-              key={i}
-              className="group relative h-[180px] p-[2px] rounded-2xl border border-gray-200 overflow-hidden transition-all duration-500 hover:scale-105 hover:border-transparent hover:shadow-[0_0_25px_rgba(139,101,207,0.3)]"
-            >
-              <div className="absolute inset-[-150%] bg-[conic-gradient(transparent,transparent,#8B65CF,#2B1C50,transparent)] animate-[spin_4s_linear_infinite] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-              <div className="relative z-10 h-full w-full rounded-[14px] bg-white flex flex-col justify-center items-center p-6">
-                <Stat value={stat.value} label={stat.label} />
-                <div className="absolute bottom-4 h-1 w-0 rounded-full bg-[#8B65CF] transition-all duration-500 group-hover:w-12 opacity-50" />
+          ].map((stat, i) => {
+            const CardContent = (
+              <div className="group relative h-[100px] md:h-[160px] p-[2px] rounded-xl border border-gray-200 overflow-hidden transition-all duration-500 hover:scale-105 hover:border-transparent hover:shadow-[0_0_20px_rgba(139,101,207,0.2)]">
+                <div className="absolute inset-[-150%] bg-[conic-gradient(transparent,transparent,#8B65CF,#2B1C50,transparent)] animate-[spin_4s_linear_infinite] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="relative z-10 h-full w-full rounded-[10px] bg-white flex flex-col justify-center items-center p-2 md:p-6">
+                  <div className="scale-75 md:scale-100 origin-center">
+                    <Stat value={stat.value} label={stat.label} />
+                  </div>
+                  <div className="absolute bottom-2 h-1 w-0 rounded-full bg-[#8B65CF] transition-all duration-500 group-hover:w-8 opacity-50" />
+                </div>
               </div>
-            </div>
-          ))}
+            );
+
+            return stat.isLink ? (
+              <button
+                key={i}
+                onClick={() =>
+                  document
+                    .getElementById("faculty")
+                    ?.scrollIntoView({ behavior: "smooth" })
+                }
+                className="w-full text-center focus:outline-none"
+              >
+                {CardContent}
+              </button>
+            ) : (
+              <div key={i}>{CardContent}</div>
+            );
+          })}
         </div>
       </section>
 
-      <section id="peo" className="max-w-6xl mx-auto px-6 pt-16">
+      <section id="peo" className="max-w-6xl mx-auto px-6 pt-10 md:pt-16">
         <SectionTitle
           center
           eyebrow={dept.title}
@@ -191,28 +219,33 @@ export default function ECEPage() {
           subtitle={dept.peo.subtitle}
         />
 
-        <div className="mt-10 grid grid-cols-12 gap-8 items-start">
-          <div className="col-span-12 md:col-span-6">
-            <div className="h-[360px] md:h-[420px] rounded-2xl bg-transparent flex items-center justify-center overflow-hidden border-none">
+        <div className="mt-8 grid grid-cols-12 gap-4 md:gap-8 items-center">
+          <div className="col-span-4 md:col-span-6">
+            <div className="h-[120px] md:h-[420px] rounded-2xl bg-transparent flex items-center justify-center overflow-hidden border-none">
               <img
                 src={dept.images.ece_logo}
                 alt=""
-                className="h-full w-full object-contain select-none scale-90"
+                className="h-full w-full object-contain select-none scale-100 md:scale-90"
               />
             </div>
           </div>
 
-          <div className="col-span-12 md:col-span-6">
-            <div className="space-y-5">
+          <div className="col-span-8 md:col-span-6">
+            <div className="space-y-3 md:space-y-5">
               {dept.peo.bullets.map((b, idx) => (
-                <Bullet key={idx} title={`PEO ${idx + 1}`} text={b} />
+                <div key={idx} className="scale-90 md:scale-100 origin-left">
+                  <Bullet title={`PEO ${idx + 1}`} text={b} />
+                </div>
               ))}
             </div>
           </div>
         </div>
       </section>
 
-      <section id="so" className="max-w-6xl mx-auto px-6 pt-16 overflow-hidden">
+      <section
+        id="so"
+        className="max-w-6xl mx-auto px-6 pt-10 md:pt-16 overflow-hidden"
+      >
         <SectionTitle
           center
           eyebrow={dept.title}
@@ -220,39 +253,49 @@ export default function ECEPage() {
           subtitle={dept.so.subtitle}
         />
 
-        <div className="relative mt-10">
+        <div className="relative mt-8 md:mt-10">
           <div
             className="flex transition-transform duration-700 ease-[cubic-bezier(0.4,0,0.2,1)]"
             style={{ transform: `translateX(-${currentIndex * 100}%)` }}
           >
             {pages.map((page, pIdx) => (
               <div key={pIdx} className="w-full flex-shrink-0">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 px-2">
+                {/* Grid: 1 column sa mobile, 3 sa desktop. Gap-6 para may hingahan. */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 px-2 items-stretch">
                   {page.map((o, idx) => (
-                    <OutcomeCard key={idx} title={o.title} text={o.text} />
+                    <div key={idx} className="flex flex-col h-full">
+                      {/* Siguraduhin na ang OutcomeCard component mo ay may class na 'h-full' 
+                  o 'flex-1' para sumunod sa taas ng pinakamahabang card.
+                */}
+                      <OutcomeCard title={o.title} text={o.text} />
+                    </div>
                   ))}
                 </div>
               </div>
             ))}
           </div>
 
-          <div className="flex justify-between items-center mt-12">
+          <div className="flex justify-between items-center mt-8 md:mt-12">
             <button
               onClick={prevSlide}
-              className="p-3 rounded-full border border-gray-100 bg-white shadow-sm text-[#2B1C50] hover:bg-[#8B65CF] hover:text-white transition-all flex items-center justify-center"
+              className="p-2 md:p-3 rounded-full border border-gray-100 bg-white shadow-sm text-[#2B1C50] hover:bg-[#8B65CF] hover:text-white transition-all flex items-center justify-center"
             >
-              <ChevronLeft size={24} strokeWidth={2.5} />
+              <ChevronLeft
+                size={20}
+                className="md:w-6 md:h-6"
+                strokeWidth={2.5}
+              />
             </button>
 
-            <div className="flex gap-2.5">
+            <div className="flex gap-1.5 md:gap-2.5">
               {pages.map((_, idx) => (
                 <button
                   key={idx}
                   onClick={() => setCurrentIndex(idx)}
                   className={`h-1.5 transition-all duration-300 rounded-full ${
                     currentIndex === idx
-                      ? "w-10 bg-[#2B1C50]"
-                      : "w-2 bg-gray-200"
+                      ? "w-6 md:w-10 bg-[#2B1C50]"
+                      : "w-1.5 md:w-2 bg-gray-200"
                   }`}
                 />
               ))}
@@ -260,9 +303,13 @@ export default function ECEPage() {
 
             <button
               onClick={nextSlide}
-              className="p-3 rounded-full border border-gray-100 bg-white shadow-sm text-[#2B1C50] hover:bg-[#8B65CF] hover:text-white transition-all flex items-center justify-center"
+              className="p-2 md:p-3 rounded-full border border-gray-100 bg-white shadow-sm text-[#2B1C50] hover:bg-[#8B65CF] hover:text-white transition-all flex items-center justify-center"
             >
-              <ChevronRight size={24} strokeWidth={2.5} />
+              <ChevronRight
+                size={20}
+                className="md:w-6 md:h-6"
+                strokeWidth={2.5}
+              />
             </button>
           </div>
         </div>
@@ -411,7 +458,10 @@ export default function ECEPage() {
         )}
       </section>
 
-      <section id="laboratories" className="max-w-6xl mx-auto px-6 pt-16">
+      <section
+        id="laboratories"
+        className="max-w-6xl mx-auto px-6 pt-10 md:pt-16"
+      >
         <SectionTitle
           center
           eyebrow={dept.title}
@@ -419,13 +469,47 @@ export default function ECEPage() {
           subtitle="Department laboratories and learning spaces"
         />
 
-        <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 md:gap-6">
           {dept.laboratories.items.map((lab, idx) => (
-            <div key={idx} className="rounded-2xl border bg-white p-6">
-              <div className="text-xs font-semibold text-gray-400">
-                LAB {idx + 1}
+            <div
+              key={idx}
+              className="group flex flex-col rounded-2xl border border-gray-100 bg-white overflow-hidden transition-all hover:shadow-lg"
+            >
+              <div className="relative aspect-video w-full bg-gray-200 flex items-center justify-center overflow-hidden">
+                <img
+                  src={lab.image || "/images/placeholder.jpg"}
+                  alt={lab.name}
+                  className="w-full h-full object-cover grayscale opacity-40 transition-transform duration-500 group-hover:scale-105"
+                />
+
+                <div className="absolute inset-0 bg-black/50 backdrop-blur-[1px] flex flex-col items-center justify-center p-4">
+                  <div className="bg-yellow-400 text-black text-[9px] font-black px-2 py-0.5 rounded mb-1.5 shadow-sm uppercase tracking-tighter">
+                    Notice
+                  </div>
+                  <span className="text-white font-bold text-xs md:text-sm tracking-widest text-center px-2 drop-shadow-md">
+                    UNDER RENOVATION
+                  </span>
+                  <div className="mt-2 flex gap-1">
+                    <div className="h-0.5 w-6 bg-yellow-400/80 rounded-full animate-pulse" />
+                    <div className="h-0.5 w-1.5 bg-yellow-400/80 rounded-full animate-pulse" />
+                  </div>
+                </div>
+
+                <div className="absolute top-3 left-3">
+                  <span className="bg-white/90 backdrop-blur-sm px-2 py-1 rounded text-[9px] font-bold text-[#2B1C50] shadow-sm uppercase">
+                    Lab {idx + 1}
+                  </span>
+                </div>
               </div>
-              <h3 className="mt-2 text-base font-bold text-gray-900">{lab}</h3>
+
+              <div className="p-4 md:p-5 border-t border-gray-50 flex-1 flex flex-col justify-center">
+                <h3 className="text-sm md:text-base font-bold text-gray-900 group-hover:text-[#8B65CF] transition-colors leading-tight">
+                  {lab.name}
+                </h3>
+                <p className="text-[9px] md:text-[10px] text-gray-400 mt-1 uppercase font-semibold tracking-wider">
+                  {dept.code} • BulSU Engineering
+                </p>
+              </div>
             </div>
           ))}
         </div>
@@ -433,20 +517,20 @@ export default function ECEPage() {
 
       <section
         id="faculty"
-        className="max-w-6xl mx-auto px-4 sm:px-6 pt-16 overflow-hidden"
+        className="max-w-6xl mx-auto px-4 sm:px-6 pt-10 md:pt-16 overflow-hidden"
       >
         <SectionTitle center eyebrow={dept.title} title={dept.faculty.title} />
 
-        <div className="relative mt-12 group h-[450px] md:h-[500px] max-w-4xl mx-auto">
+        <div className="relative mt-8 md:mt-12 group h-[400px] md:h-[500px] max-w-4xl mx-auto">
           <button
             onClick={() =>
               setActiveIdx((prev) =>
                 prev > 0 ? prev - 1 : dept.faculty.members.length - 1,
               )
             }
-            className="absolute left-2 md:left-5 top-1/2 -translate-y-1/2 z-50 bg-white/90 backdrop-blur-md p-3 rounded-full shadow-xl border border-gray-100 text-[#2B1C50] hover:bg-[#2B1C50] hover:text-white transition-all active:scale-90"
+            className="absolute left-0 md:left-5 top-1/2 -translate-y-1/2 z-50 bg-white/90 backdrop-blur-md p-2 md:p-3 rounded-full shadow-xl border border-gray-100 text-[#2B1C50] hover:bg-[#2B1C50] hover:text-white transition-all active:scale-90"
           >
-            <span className="block transform rotate-180 text-[10px] font-bold">
+            <span className="block transform rotate-180 text-[8px] md:text-[10px] font-bold">
               ➜
             </span>
           </button>
@@ -457,9 +541,9 @@ export default function ECEPage() {
                 prev < dept.faculty.members.length - 1 ? prev + 1 : 0,
               )
             }
-            className="absolute right-2 md:right-5 top-1/2 -translate-y-1/2 z-50 bg-white/90 backdrop-blur-md p-3 rounded-full shadow-xl border border-gray-100 text-[#2B1C50] hover:bg-[#2B1C50] hover:text-white transition-all active:scale-90"
+            className="absolute right-0 md:right-5 top-1/2 -translate-y-1/2 z-50 bg-white/90 backdrop-blur-md p-2 md:p-3 rounded-full shadow-xl border border-gray-100 text-[#2B1C50] hover:bg-[#2B1C50] hover:text-white transition-all active:scale-90"
           >
-            <span className="text-[10px] font-bold">➜</span>
+            <span className="text-[8px] md:text-[10px] font-bold">➜</span>
           </button>
 
           <div className="relative h-full flex items-center justify-center">
@@ -476,55 +560,55 @@ export default function ECEPage() {
                   onClick={() => setActiveIdx(idx)}
                   className={`
               absolute transition-all duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] cursor-pointer
-              flex flex-col rounded-[2rem] overflow-hidden border group/card
+              flex flex-col rounded-[1.5rem] md:rounded-[2rem] overflow-hidden border group/card
               ${
                 isActive
-                  ? "z-30 w-[85%] max-w-[280px] md:max-w-[320px] h-[380px] md:h-[420px] opacity-100 shadow-[0_30px_60px_-15px_rgba(43,28,80,0.25)] bg-white border-[#2B1C50]"
-                  : "z-10 w-[70%] max-w-[220px] md:max-w-[250px] h-[300px] md:h-[340px] opacity-40 bg-gray-50 border-gray-100"
+                  ? "z-30 w-[78%] sm:w-[85%] max-w-[260px] md:max-w-[320px] h-[350px] md:h-[420px] opacity-100 shadow-[0_20px_40px_-10px_rgba(43,28,80,0.2)] bg-white border-[#2B1C50]"
+                  : "z-10 w-[60%] sm:w-[70%] max-w-[200px] md:max-w-[250px] h-[280px] md:h-[340px] opacity-30 bg-gray-50 border-gray-100"
               }
             `}
                   style={{
                     transform: `
-                translateX(${position * (typeof window !== "undefined" && window.innerWidth < 500 ? 55 : 75)}%) 
-                translateY(${isActive ? "-15px" : "0px"}) 
-                scale(${isActive ? 1 : 0.8})
+                translateX(${position * (typeof window !== "undefined" && window.innerWidth < 640 ? 68 : 85)}%) 
+                translateY(${isActive ? "-10px" : "0px"}) 
+                scale(${isActive ? 1 : 0.85})
               `,
                   }}
                 >
-                  <div className="relative w-full h-[70%] overflow-hidden bg-gray-50">
+                  <div className="relative w-full h-[65%] md:h-[70%] overflow-hidden bg-gray-100">
                     <img
                       src={member.image}
                       className="w-full h-full object-cover object-top transition-transform duration-1000 group-hover/card:scale-110"
                       alt={member.name}
                     />
                     {!isActive && (
-                      <div className="absolute inset-0 bg-[#2B1C50]/10" />
+                      <div className="absolute inset-0 bg-white/20" />
                     )}
                   </div>
 
-                  <div className="px-4 py-4 text-center flex-1 flex flex-col justify-center items-center bg-white relative">
+                  <div className="px-3 md:px-4 py-3 md:py-4 text-center flex-1 flex flex-col justify-center items-center bg-white relative">
                     <h3
-                      className={`font-bold text-[12px] md:text-[14px] uppercase tracking-tight leading-tight transition-colors duration-300
+                      className={`font-bold text-[11px] md:text-[14px] uppercase tracking-tight leading-tight transition-colors duration-300
                 ${isActive ? "text-[#2B1C50]" : "text-gray-400"}`}
                     >
                       {member.name}
                     </h3>
 
                     <div
-                      className={`h-0.5 my-2 rounded-full transition-all duration-500
-                ${isActive ? "w-12 bg-[#8B65CF]" : "w-4 bg-gray-200"}`}
+                      className={`h-0.5 my-1.5 md:my-2 rounded-full transition-all duration-500
+                ${isActive ? "w-10 md:w-12 bg-[#8B65CF]" : "w-4 bg-gray-200"}`}
                     />
 
                     <p
-                      className={`text-[9px] md:text-[10px] font-bold uppercase tracking-[0.2em]
+                      className={`text-[8px] md:text-[10px] font-bold uppercase tracking-[0.15em]
                 ${isActive ? "text-gray-600" : "text-gray-300"}`}
                     >
                       {member.role}
                     </p>
 
                     <div
-                      className={`absolute bottom-0 left-0 h-1.5 transition-all duration-700 origin-left z-20
-                ${isActive ? "w-full bg-[#2B1C50] opacity-100" : "w-0 bg-[#2B1C50]/50 opacity-0"}`}
+                      className={`absolute bottom-0 left-0 h-1 transition-all duration-700 origin-left z-20
+                ${isActive ? "w-full bg-[#2B1C50] opacity-100" : "w-0 opacity-0"}`}
                     />
                   </div>
                 </div>
@@ -533,20 +617,25 @@ export default function ECEPage() {
           </div>
         </div>
 
-        <div className="flex justify-center gap-1.5 mt-6 pb-10">
+        <div className="flex justify-center flex-wrap gap-1.5 mt-4 md:mt-6 pb-10 px-4">
           {dept.faculty.members.map((_, i) => (
             <button
               key={i}
               onClick={() => setActiveIdx(i)}
-              className={`h-1.5 rounded-full transition-all duration-500 ${
-                activeIdx === i ? "w-10 bg-[#2B1C50]" : "w-2 bg-gray-200"
+              className={`h-1 rounded-full transition-all duration-500 ${
+                activeIdx === i
+                  ? "w-8 md:w-10 bg-[#2B1C50]"
+                  : "w-1.5 md:w-2 bg-gray-200"
               }`}
             />
           ))}
         </div>
       </section>
 
-      <section id="careers" className="max-w-6xl mx-auto px-6 pt-16 pb-20">
+      <section
+        id="careers"
+        className="max-w-6xl mx-auto px-4 sm:px-6 pt-10 md:pt-16 pb-20"
+      >
         <SectionTitle
           center
           eyebrow={dept.title}
@@ -554,31 +643,29 @@ export default function ECEPage() {
           subtitle={dept.careers.subtitle}
         />
 
-        <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="mt-8 grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-6 md:gap-8">
           {dept.careers.cards.map((card, idx) => {
-            const IconComponent = card.icon;
-
             return (
               <div
                 key={idx}
-                className="group relative p-[2px] rounded-2xl border border-gray-200 overflow-hidden transition-all duration-500 hover:scale-105 hover:border-transparent hover:shadow-[0_0_25px_rgba(139,101,207,0.3)]"
+                className="group relative p-[1.5px] md:p-[2px] rounded-xl md:rounded-2xl border border-gray-200 overflow-hidden transition-all duration-500 hover:scale-[1.03] md:hover:scale-105 hover:border-transparent hover:shadow-[0_0_20px_rgba(139,101,207,0.25)]"
               >
                 <div className="absolute inset-[-150%] bg-[conic-gradient(transparent,transparent,#8B65CF,#2B1C50,transparent)] animate-[spin_4s_linear_infinite] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <div className="relative z-10 h-full w-full rounded-[14px] bg-white p-6 text-center">
+
+                <div className="relative z-10 h-full w-full rounded-[11px] md:rounded-[14px] bg-white p-4 md:p-6 text-center flex flex-col items-center justify-center">
                   <div className="flex justify-center" aria-hidden="true">
-                    {IconComponent && (
-                      <IconComponent
-                        size={32}
-                        color="#8B65CF"
-                        strokeWidth={2}
-                        className="transition-all duration-300 group-hover:drop-shadow-[0_0_8px_#0ea5e9]"
-                      />
+                    {card.icon && (
+                      <span className="text-2xl md:text-4xl transition-all duration-300 group-hover:drop-shadow-[0_0_8px_rgba(139,101,207,0.8)]">
+                        {card.icon}
+                      </span>
                     )}
                   </div>
-                  <h3 className="mt-4 font-bold text-gray-900 transition-colors group-hover:text-[#2B1C50]">
+
+                  <h3 className="mt-3 md:mt-4 font-bold text-gray-900 text-xs md:text-base transition-colors group-hover:text-[#2B1C50] leading-tight">
                     {card.title}
                   </h3>
-                  <p className="mt-2 text-sm text-gray-600 leading-relaxed">
+
+                  <p className="mt-2 text-[10px] md:text-sm text-gray-600 leading-tight md:leading-relaxed line-clamp-3 md:line-clamp-none">
                     {card.text}
                   </p>
                 </div>
@@ -587,8 +674,10 @@ export default function ECEPage() {
           })}
         </div>
       </section>
-
-      <section id="contact" className="max-w-6xl mx-auto px-4 sm:px-6 py-10 md:py-10">
+      <section
+        id="contact"
+        className="max-w-6xl mx-auto px-4 sm:px-6 py-10 md:py-10"
+      >
         <div className="relative group rounded-[2rem] md:rounded-[2.5rem] border border-[#8B65CF]/30 bg-gradient-to-br from-[#2B1C50]/5 via-white to-[#8B65CF]/10 p-6 md:p-12 shadow-xl overflow-hidden">
           <div className="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 bg-[#8B65CF]/10 blur-[80px] rounded-full pointer-events-none" />
           <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-64 h-64 bg-[#2B1C50]/10 blur-[80px] rounded-full pointer-events-none" />
