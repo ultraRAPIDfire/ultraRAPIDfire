@@ -6,6 +6,7 @@ import {
   loadLandingDraft,
   mergeLandingWithOverrides,
 } from "../lib/landingAdmin";
+import { Mail } from "lucide-react";
 
 type Sections = LandingPageData["sections"];
 type HeroStat = LandingPageData["hero"]["stats"][number];
@@ -72,7 +73,7 @@ function StatisticsSection({ data }: { data: Sections["statistics"] }) {
   return (
     <section id="statistics" className="max-w-6xl mx-auto px-6 py-16">
       <div className="relative overflow-hidden rounded-3xl bg-white border border-gray-100 p-8 md:p-12 shadow-[0_8px_30px_rgba(169,0,0,0.06)]">
-        
+
         <div className="absolute -right-20 -top-20 h-72 w-72 rounded-full bg-red-500 opacity-10 blur-[80px] pointer-events-none"></div>
         <div className="absolute -bottom-20 -left-20 h-72 w-72 rounded-full bg-orange-400 opacity-10 blur-[80px] pointer-events-none"></div>
 
@@ -95,15 +96,15 @@ function StatisticsSection({ data }: { data: Sections["statistics"] }) {
 
         <div className="relative z-10 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6">
           {data.departmentStats.map((dept, idx) => (
-            <div 
-              key={idx} 
+            <div
+              key={idx}
               className="group relative flex flex-col justify-between rounded-2xl border border-gray-100 bg-white p-6 transition-all duration-300 hover:-translate-y-2 hover:border-orange-300 hover:shadow-[0_15px_30px_rgba(234,88,12,0.12)]"
             >
               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#a90000] to-orange-500 transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100 rounded-t-2xl"></div>
 
               <div>
                 <h3 className="text-2xl font-black text-gray-900 group-hover:text-[#a90000] transition-colors">{dept.dept}</h3>
-                
+
                 <p className="mt-1 mb-3 text-[10px] sm:text-xs font-bold text-gray-400 uppercase tracking-widest leading-tight">
                   {dept.fullName}
                 </p>
@@ -121,7 +122,7 @@ function StatisticsSection({ data }: { data: Sections["statistics"] }) {
                       {dept.passingRate}
                     </p>
                     <p className="mt-1.5 text-[10px] font-bold text-gray-400 uppercase tracking-widest leading-tight">
-                      Board Exam Pass Rate <br/>
+                      Board Exam Pass Rate <br />
                       <span className="text-orange-500/80">({dept.latestExamDate})</span>
                     </p>
                   </div>
@@ -143,13 +144,83 @@ function StatisticsSection({ data }: { data: Sections["statistics"] }) {
 }
 
 function ContactSection({ data }: { data: Sections["contact"] }) {
+  const contacts = [
+    {
+      program: "Bachelor of Science in Civil Engineering",
+      email: "radgerteddy.manuel@bulsu.edu.ph",
+    },
+    {
+      program: "Bachelor of Science in Computer Engineering",
+      email: "marialorena.villena@ms.bulsu.edu.ph",
+    },
+    {
+      program: "Bachelor of Science in Electrical Engineering",
+      email: "eleazar.nabong@ms.bulsu.edu.ph",
+    },
+    {
+      program: "Bachelor of Science in Electronics Engineering",
+      email: "donald.lapiguera@bulsu.edu.ph",
+    },
+    {
+      program: "Bachelor of Science in Industrial Engineering",
+      email: "jeremylaurence.banez@bulsu.edu.ph",
+    },
+    {
+      program: "Bachelor of Science in Mechanical Engineering",
+      email: "aldrin.bernardo@bulsu.edu.ph",
+    },
+    {
+      program: "Bachelor of Science in Manufacturing Engineering",
+      email: "mfe@bulsu.edu.ph",
+    },
+    {
+      program: "Bachelor of Science in Mechatronics Engineering",
+      email: "arvinjulius.tullao@bulsu.edu.ph",
+    },
+  ];
+
   return (
-    <section id="contact" className="max-w-6xl mx-auto px-6 py-10">
-      <SectionCard data={data}>
-        <p className="mt-3 text-sm text-gray-600">Email: {data.email}</p>
-        <p className="text-sm text-gray-600">Phone: {data.phone}</p>
-        <p className="text-sm text-gray-600">Address: {data.address}</p>
-      </SectionCard>
+    <section id="contact" className="max-w-6xl mx-auto px-6 py-16">
+      <div className="rounded-3xl bg-white border border-gray-100 p-8 md:p-12 shadow-[0_8px_30px_rgba(169,0,0,0.06)]">
+
+        <div className="mb-10 border-b border-gray-100 pb-6">
+          <p className="text-sm font-bold tracking-widest text-orange-500 uppercase mb-2">
+            Contact Directory
+          </p>
+          <h2 className="text-3xl md:text-4xl font-black text-[#a90000]">
+            College of Engineering
+          </h2>
+          <p className="mt-2 text-sm text-gray-500">
+            Bulacan State University
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-6">
+          {contacts.map((item, idx) => (
+            <div
+              key={idx}
+              className="group rounded-2xl border border-gray-100 bg-white p-6 transition-all duration-300 hover:-translate-y-2 hover:border-orange-400 hover:shadow-[0_15px_30px_rgba(234,88,12,0.12)]"
+            >
+              <h3 className="text-lg font-bold text-gray-900 group-hover:text-[#a90000] transition-colors">
+                {item.program}
+              </h3>
+
+              <div className="mt-3 flex items-center gap-3 text-sm text-gray-600">
+                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-orange-50 group-hover:bg-orange-100 transition">
+                  <Mail className="h-4 w-4 text-orange-500" strokeWidth={2} />
+                </div>
+                <span className="leading-none">{item.email}</span>
+              </div>
+
+              <div className="mt-6 pt-4 border-t border-gray-50">
+                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+                  Bulacan State University
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
     </section>
   );
 }
@@ -243,9 +314,8 @@ export default function LandingPage() {
                   ) : (
                     <a
                       href={link.href}
-                      className={`transition-colors duration-200 hover:text-[#202020] ${
-                        link.label === "Home" ? "font-semibold text-[#202020]" : ""
-                      }`}
+                      className={`transition-colors duration-200 hover:text-[#202020] ${link.label === "Home" ? "font-semibold text-[#202020]" : ""
+                        }`}
                     >
                       {link.label}
                     </a>
@@ -306,15 +376,15 @@ export default function LandingPage() {
                 const Icon = heroStatIcons[item.icon];
 
                 return (
-                <div key={item.label} className="flex items-start gap-3 rounded-2xl px-3 py-1">
-                  <span className="mt-1 text-[#bcc1cf]">
-                    <Icon className="h-5 w-5" strokeWidth={1.8} />
-                  </span>
-                  <div>
-                    <p className="text-[1.75rem] font-bold leading-none text-[#252525]">{item.value}</p>
-                    <p className="mt-2 text-sm text-[#8d8d93]">{item.label}</p>
+                  <div key={item.label} className="flex items-start gap-3 rounded-2xl px-3 py-1">
+                    <span className="mt-1 text-[#bcc1cf]">
+                      <Icon className="h-5 w-5" strokeWidth={1.8} />
+                    </span>
+                    <div>
+                      <p className="text-[1.75rem] font-bold leading-none text-[#252525]">{item.value}</p>
+                      <p className="mt-2 text-sm text-[#8d8d93]">{item.label}</p>
+                    </div>
                   </div>
-                </div>
                 );
               })}
             </div>
