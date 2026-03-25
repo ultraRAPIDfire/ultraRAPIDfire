@@ -127,22 +127,14 @@ export default function MEEPage() {
               href="https://www.facebook.com/AIMEESBulSU/posts/pfbid02ijHers3CGTgvyKqmZkGb1X7XDtdX6uhnTX3J8hCWgEYbuXzUhY2eGnktoXpjJUaHl?rdid=MeGMAnY0orEaeqMi#"
               target="_blank"
               rel="noopener noreferrer"
-              className="block col-span-12 md:col-span-6"
-            >
-              <div className="group h-[350px] rounded-2xl overflow-hidden bg-gray-200 
-                      transition-all duration-500 ease-out 
-                      hover:-translate-y-2 hover:shadow-2xl cursor-pointer">
-
+              className="block col-span-12 md:col-span-6">
+              <div className="group h-[350px] rounded-2xl overflow-hidden bg-gray-200 transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl cursor-pointer">
                 <div className="w-full h-full relative overflow-hidden">
                   <img
                     src={dept.images.heroSmall2}
                     alt=""
-                    className="w-full h-full object-cover 
-                       transition-transform duration-700 ease-out 
-                       group-hover:scale-110"/>
-                  <div className="absolute inset-0 bg-black/10 
-                          opacity-0 group-hover:opacity-100 
-                          transition duration-500"></div>
+                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"/>
+                  <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition duration-500"></div>
                 </div>
               </div>
             </a>
@@ -195,12 +187,11 @@ export default function MEEPage() {
         <div className="mt-10 grid grid-cols-12 gap-8 items-start">
 
           <div className="col-span-12 md:col-span-6 overflow-hidden">
-            <div className="w-full h-[350px] md:h-[350px] rounded-2xl overflow-hidden flex items-center justify-center">
+            <div className="w-[80%] md:w-[90%] rounded-2xl overflow-hidden flex items-center justify-center">
 
               <img
                 src={dept.images.peo}
                 alt="Mechatronics Gears"
-                className="w-full h-full object-contain p-6"
               />
 
             </div>
@@ -484,10 +475,6 @@ const outcomeIcons = [
 
 const careerIcons = [
   Cpu, Cog, Wrench,
-];
-
-const contactIcons = [
-  MessageSquare
 ];
 
 function OutcomeCard({
