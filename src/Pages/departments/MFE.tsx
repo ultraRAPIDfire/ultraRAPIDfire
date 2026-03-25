@@ -179,7 +179,7 @@ export default function MFEPage() {
             <div className="border-l border-slate-800 pl-8 hover:border-blue-600 transition-colors duration-500">
               <AnimatedStat 
                 value={dept.programOverview.stats.nonTeaching} 
-                label="Support Staff" 
+                label="Non-Teaching Personnel" 
                 Component={StatItem} 
               />
             </div>
