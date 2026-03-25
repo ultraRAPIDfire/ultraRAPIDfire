@@ -332,10 +332,56 @@ function TrackModal({ isOpen, onClose, tracks, base }: { isOpen: boolean, onClos
   );
 }
 
+function ImagePreviewModal({ isOpen, onClose, images }: { isOpen: boolean, onClose: () => void, images: string[] }) {
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 z-[100] flex items-center justify-center px-6">
+      <div 
+        className="absolute inset-0 bg-navy-900/90 backdrop-blur-md ce-animate-fade-in"
+        onClick={onClose}
+      ></div>
+      
+      <div className="relative bg-white rounded-[3rem] shadow-2xl w-full max-w-5xl overflow-hidden ce-animate-scale-in max-h-[90vh] flex flex-col">
+        <div className="ce-bg-navy p-8 text-white flex justify-between items-center">
+          <div>
+            <div className="text-[10px] font-black ce-text-gold tracking-[0.4em] uppercase mb-1">Performance Visualization</div>
+            <h3 className="text-2xl font-black uppercase tracking-tighter italic">Licensure <span className="ce-text-gold">Graphs</span></h3>
+          </div>
+          <button onClick={onClose} className="text-white/40 hover:text-white transition-colors p-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+          </button>
+        </div>
+        
+        <div className="p-10 bg-gray-50 overflow-y-auto flex-1">
+          <div className="grid grid-cols-1 gap-12">
+            {images.map((img, idx) => (
+              <div key={idx} className="space-y-4">
+                <div className="text-xs font-black ce-text-navy/40 uppercase tracking-widest flex items-center gap-3">
+                   <span className="w-8 h-px ce-bg-gold"></span>
+                   Graph Analysis 0{idx + 1}
+                </div>
+                <div className="rounded-[2rem] overflow-hidden border-4 border-white shadow-2xl">
+                  <img src={img} alt={`Performance Graph ${idx + 1}`} className="w-full h-auto" />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="p-6 bg-white border-t border-gray-100 text-center">
+           <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Bulacan State University • Civil Engineering Department</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function CEPage() {
   const [baseDept] = useState<typeof CE>(CE);
   const [activeId, setActiveId] = useState<string>("home");
   const [isTrackModalOpen, setIsTrackModalOpen] = useState(false);
+  const [isGraphModalOpen, setIsGraphModalOpen] = useState(false);
 
   const dept = useMemo(
     () => mergeDeptWithOverrides(baseDept),
@@ -343,6 +389,7 @@ export default function CEPage() {
   );
 
   const baseDir = "/departments/CE"; // Ensure baseDir is correct for downloads
+  const graphImages = [`${baseDir}/graph1.png`, `${baseDir}/graph2.png`];
 
   const heroImages = useMemo(() => dept.images.heroCarousel, [dept.images.heroCarousel]);
 
@@ -558,6 +605,22 @@ export default function CEPage() {
                 </FadeInSection>
               ))}
             </div>
+
+            {/* Preview Graphs Button */}
+            <FadeInSection delay="ce-delay-5" className="mt-16 flex justify-center">
+               <button 
+                 onClick={() => setIsGraphModalOpen(true)}
+                 className="group relative flex items-center gap-4 bg-white border-2 ce-border-gold px-10 py-5 rounded-2xl hover:ce-bg-navy hover:border-transparent transition-all duration-500 shadow-xl shadow-gold-500/10"
+               >
+                 <div className="flex flex-col items-start">
+                   <span className="text-[10px] font-black ce-text-gold uppercase tracking-[0.3em] group-hover:text-white/40 transition-colors">Visual Data</span>
+                   <span className="text-sm font-black ce-text-navy uppercase tracking-widest group-hover:text-white transition-colors">Performance Graphs</span>
+                 </div>
+                 <div className="w-10 h-10 rounded-xl ce-bg-light flex items-center justify-center text-navy group-hover:ce-bg-gold transition-all">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M3 3v18h18"/><path d="M18 9l-5 5-2-2-4 4"/></svg>
+                 </div>
+               </button>
+            </FadeInSection>
           </div>
         </section>
       )}
@@ -779,6 +842,12 @@ export default function CEPage() {
       </section>
 
       <Footer />
+
+      <ImagePreviewModal 
+        isOpen={isGraphModalOpen} 
+        onClose={() => setIsGraphModalOpen(false)} 
+        images={graphImages} 
+      />
     </div>
   );
 }

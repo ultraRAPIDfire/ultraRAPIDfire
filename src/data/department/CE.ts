@@ -144,11 +144,23 @@ export const CE = {
   careers: {
     eyebrow: "FUTURE PATHS",
     title: "Career Opportunities",
-    subtitle: "EDIT ME: careers subtitle.",
+    subtitle: "The Civil Engineering program offers specialized areas that allow students to develop expertise in key fields of engineering practice and prepare for diverse career opportunities in industry, government, and research.",
     cards: [
-      { icon: "🏗️", title: "Site Engineer", text: "Description..." },
-      { icon: "📐", title: "Structural Engineer", text: "Description..." },
-      { icon: "🌉", title: "Project Engineer", text: "Description..." },
+      { 
+        icon: "📐", 
+        title: "Structural Engineering", 
+        text: "Focuses on the analysis and design of buildings, bridges, and infrastructure systems to ensure strength, stability, and safety." 
+      },
+      { 
+        icon: "🏗️", 
+        title: "Construction Engineering and Management", 
+        text: "Covers project planning, scheduling, cost estimation, and management of construction projects to ensure efficient execution." 
+      },
+      { 
+        icon: "🌉", 
+        title: "Transportation Engineering", 
+        text: "Deals with the planning, design, and operation of transportation systems such as roads, highways, and traffic networks." 
+      },
     ],
   },
 };
