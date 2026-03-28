@@ -42,3 +42,29 @@ jobs:
       # If any error occurs here, this step will fail, the workflow will stop, and GitHub will show a red 'X'.
       - name: Build project
         run: npm run build
+
+  report-failure:
+    name: Report Failure
+    runs-on: ubuntu-latest
+    # This job runs only if the build-and-test job fails.
+    if: failure()
+    # This job needs the build-and-test job to have run first.
+    needs: [build-and-test]
+    steps:
+      - name: Add failure comment
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { owner, repo } = context.repo;
+            const sha = context.sha;
+            const run_id = context.runId;
+            
+            const body = `### :x: CI Check Failed\n\nThe \`build-and-test\` job failed for this code.\n\nTo see what went wrong and fix the main problem, please review the **Workflow Run Details**.`;
+
+            // If it's a pull request, comment on the PR. Otherwise, comment on the commit.
+            if (context.issue.number) {
+              await github.rest.issues.createComment({ owner, repo, issue_number: context.issue.number, body });
+            } else {
+              await github.rest.repos.createCommitComment({ owner, repo, commit_sha: sha, body });
+            }
