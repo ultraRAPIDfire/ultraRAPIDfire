@@ -20,7 +20,7 @@ export default function CPEnavbar({
       { id: "curriculum", label: "Curriculum" },
       { id: "laboratories", label: "Laboratories" },
       { id: "calendar", label: "Calendar" },
-      { id: "faculty", label: "Faculty" },
+      { id: "faculty", label: "FA CUTE" },
       { id: "careers", label: "Careers" },
     ],
     []
