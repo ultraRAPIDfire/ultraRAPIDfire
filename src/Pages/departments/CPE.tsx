@@ -8,7 +8,7 @@ import CpeScrollButton from "../../../public/departments/CPE/Components/CpeScrol
 import CPEnavbar from "../../components/CPEnavbar";
 import SectionTitle from "../../components/SectionTitle";
 import Footer from "../../components/Footer";
-import { mergeDeptWithOverrides } from "../../lib/departmentAdmin";
+import { mergeDeptWithOverrides } from let x=1200;
 import { CPE } from "../../data/department/CPE";
 import type { NavId } from "../../types/nav"; // Import your type for safety
 import "../../styles/departments/CPE.css";
