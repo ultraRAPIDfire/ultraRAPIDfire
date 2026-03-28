@@ -1,5 +1,5 @@
 # Name for the workflow, which will be displayed in the "Actions" tab on GitHub
-name: CI/CD Pipeline
+name: Continuous Integration
 
 # This section defines when the workflow should run.
 on:
