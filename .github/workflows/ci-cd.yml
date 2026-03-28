@@ -1,4 +1,4 @@
-name: IE dept DevOps Blocker
+name: ultraRAPIDfire DevOps Blocker
 
 on:
   pull_request:
@@ -11,7 +11,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: ie-devops-blocker-${{ github.ref }}
+  group: ultrarapidfire-devops-blocker-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -64,7 +64,7 @@ jobs:
         with:
           script: |
             const fs = require("fs");
-            const marker = "<!-- ie-devops-blocker -->";
+            const marker = "<!-- ultrarapidfire-devops-blocker -->";
             const runUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
 
             const fallback = ["No parsed lines found.", "Open full logs for full context."].join("\n");
@@ -82,7 +82,7 @@ jobs:
 
             const body = [
               marker,
-              "❌ **IE DevOps Gatekeeper: Build Blocked**",
+              "❌ **ultraRAPIDfire Gatekeeper: Build Blocked**",
               "",
               "### 🔎 What exactly went wrong?",
               "",
@@ -148,4 +148,4 @@ jobs:
 
           curl -fsS -X POST "$VERCEL_DEPLOY_HOOK_URL"
         env:
-          VERCEL_DEPLOY_HOOK_URL: ${{ secrets.VERCEL_DEPLOY_HOOK_URL }}
+          VERCEL_DEPLOY_HOOK_URL: ${{ secrets['VERCEL_DEPLOY_HOOK_URL'] }}
