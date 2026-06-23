@@ -1,10 +1,3 @@
-# Hi there, I'm John Clarence! 👋 
-
-<!-- Animated Typing Intro Banner -->
-<p align="center">
-  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=600&size=24&pause=1000&color=39FF14&center=true&vCenter=true&width=700&lines=Computer+Engineering+Graduate+(Cum+Laude);Junior+Java+Developer;AI+Automation+%26+n8n+Expert;Building+Systems+on+Autopilot...%E2%9A%A1" alt="Typing SVG" />
-</p>
-
 <!-- Embedded Moving Tech Animation Asset -->
 <p align="center">
   <img src="https://media.giphy.com/media/Qss04M4cKOB7K7uYAV/giphy.gif" width="350" alt="Coding Animation">
@@ -18,7 +11,7 @@
 ---
 
 ## 🚀 About Me
-I am a results-driven **Computer Engineering graduate (Cum Laude)** specializing in full-stack web/mobile development and advanced AI workflow automation. I bridge the gap between robust software engineering and smart automation pipelines to put business processes on autopilot.
+I am a results-driven **Software Developer** specializing in full-stack web/mobile development and advanced AI workflow automation. I bridge the gap between robust software engineering and smart automation pipelines to put business processes on autopilot.
 
 ---
 
