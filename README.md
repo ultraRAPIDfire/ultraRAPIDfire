@@ -70,13 +70,13 @@ I am a results-driven **Computer Engineering graduate (Cum Laude)** specializing
 <!-- Moving Snake Contribution Graph -->
 ### My Contribution Snake
 <p align="center">
-  <img src="https://raw.githubusercontent.com/YOUR_GITHUB_USERNAME/YOUR_GITHUB_USERNAME/output/github-contribution-grid-snake.svg" alt="Snake Animation" />
+  <img src="https://raw.githubusercontent.com/j078/j078/output/github-contribution-grid-snake.svg" alt="Snake Animation" />
 </p>
 
 ### 📈 GitHub Statistics
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=YOUR_GITHUB_USERNAME&show_icons=true&theme=radical&count_private=true" alt="GitHub Stats" height="150" />
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=YOUR_GITHUB_USERNAME&layout=compact&theme=radical" alt="Top Languages" height="150" />
+  <img src="https://github-readme-stats.vercel.app/api?username=j078&show_icons=true&theme=radical&count_private=true" alt="GitHub Stats" height="150" />
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=j078&layout=compact&theme=radical" alt="Top Languages" height="150" />
 </p>
 
 ---
