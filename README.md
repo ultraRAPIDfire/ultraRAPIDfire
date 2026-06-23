@@ -17,14 +17,14 @@ I am a results-driven **Software Developer** specializing in full-stack web/mobi
 
 ## 🛠️ Tech Stack & Ecosystem
 
-### 💻 Languages & Frameworks (Auto-Animating)
+### 💻 Languages & Frameworks
 <p align="left">
   <a href="https://skillicons.dev">
     <img src="https://skillicons.dev/icons?i=java,js,python,php,nodejs,express,react,html,css&theme=dark&perline=9&animate=true" alt="My Skills" />
   </a>
 </p>
 
-### ⚙️ Automation, Cloud & Databases (Auto-Animating)
+### ⚙️ Automation, Cloud & Databases
 <p align="left">
   <a href="https://skillicons.dev">
     <img src="https://skillicons.dev/icons?i=mysql,firebase,git,github,aws&theme=dark&perline=5&animate=true" alt="Tools" />
