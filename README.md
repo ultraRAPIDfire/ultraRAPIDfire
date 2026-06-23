@@ -2,9 +2,12 @@
 
 <!-- Animated Typing Intro Banner -->
 <p align="center">
-  <a href="https://github.com/denvercoder1/readme-typing-svg">
-    <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=600&size=24&pause=1000&color=39FF14&center=true&vCenter=true&width=700&lines=Computer+Engineering+Graduate+(Cum+Laude);Junior+Java+Developer;AI+Automation+%26+n8n+Expert;Building+Systems+on+Autopilot...%E2%9A%A1" alt="Typing SVG" />
-  </a>
+  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=600&size=24&pause=1000&color=39FF14&center=true&vCenter=true&width=700&lines=Computer+Engineering+Graduate+(Cum+Laude);Junior+Java+Developer;AI+Automation+%26+n8n+Expert;Building+Systems+on+Autopilot...%E2%9A%A1" alt="Typing SVG" />
+</p>
+
+<!-- Embedded Moving Tech Animation Asset -->
+<p align="center">
+  <img src="https://media.giphy.com/media/Qss04M4cKOB7K7uYAV/giphy.gif" width="350" alt="Coding Animation">
 </p>
 
 <p align="center">
@@ -33,6 +36,8 @@ I am a results-driven **Computer Engineering graduate (Cum Laude)** specializing
   <a href="https://skillicons.dev">
     <img src="https://skillicons.dev/icons?i=mysql,firebase,git,github,aws&theme=dark" alt="Tools" />
   </a>
+</p>
+<p align="left">
   <img src="https://img.shields.io/badge/n8n-FF6C37?style=for-the-badge&logo=n8n&logoColor=white" alt="n8n">
   <img src="https://img.shields.io/badge/Serverless-FD5750?style=for-the-badge&logo=serverless&logoColor=white" alt="Serverless">
 </p>
@@ -65,13 +70,7 @@ I am a results-driven **Computer Engineering graduate (Cum Laude)** specializing
 
 ---
 
-## 📊 Live Moving Activity Graph & Stats
-
-<!-- Moving Snake Contribution Graph -->
-### My Contribution Snake
-<p align="center">
-  <img src="https://raw.githubusercontent.com/j078/j078/output/github-contribution-grid-snake.svg" alt="Snake Animation" />
-</p>
+## 📊 Live Activity Stats
 
 ### 📈 GitHub Statistics
 <p align="center">
