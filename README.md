@@ -70,12 +70,10 @@ I am a results-driven **Computer Engineering graduate (Cum Laude)** specializing
 
 ---
 
-## 📊 Live Activity Stats
+## 🎨 Featured Showcase
 
-### 📈 GitHub Statistics
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=j078&show_icons=true&theme=radical&count_private=true" alt="GitHub Stats" height="150" />
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=j078&layout=compact&theme=radical" alt="Top Languages" height="150" />
+  <img src="down.gif" width="600" alt="My Custom Showcase GIF" />
 </p>
 
 ---
