@@ -1,24 +1,38 @@
 # Hi there, I'm John Clarence! 👋 
 
-<p align="left">
+<!-- Animated Typing Intro Banner -->
+<p align="center">
+  <a href="https://github.com/denvercoder1/readme-typing-svg">
+    <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=600&size=24&pause=1000&color=39FF14&center=true&vCenter=true&width=700&lines=Computer+Engineering+Graduate+(Cum+Laude);Junior+Java+Developer;AI+Automation+%26+n8n+Expert;Building+Systems+on+Autopilot...%E2%9A%A1" alt="Typing SVG" />
+  </a>
+</p>
+
+<p align="center">
   <a href="https://linkedin.com/in/j078"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"></a>
   <img src="https://img.shields.io/badge/Location-Bulacan,%20PH-FF5733?style=for-the-badge" alt="Location">
 </p>
 
+---
+
+## 🚀 About Me
 I am a results-driven **Computer Engineering graduate (Cum Laude)** specializing in full-stack web/mobile development and advanced AI workflow automation. I bridge the gap between robust software engineering and smart automation pipelines to put business processes on autopilot.
 
 ---
 
 ## 🛠️ Tech Stack & Ecosystem
 
-### 💻 Languages & Frameworks
+### 💻 Languages & Frameworks (Hover to Animate)
 <p align="left">
-  <img src="https://skillicons.dev/icons?i=java,js,python,php,nodejs,express,react,html,css" alt="My Skills" />
+  <a href="https://skillicons.dev">
+    <img src="https://skillicons.dev/icons?i=java,js,python,php,nodejs,express,react,html,css&theme=dark" alt="My Skills" />
+  </a>
 </p>
 
 ### ⚙️ Automation, Cloud & Databases
 <p align="left">
-  <img src="https://skillicons.dev/icons?i=mysql,firebase,git,github,aws" alt="Tools" />
+  <a href="https://skillicons.dev">
+    <img src="https://skillicons.dev/icons?i=mysql,firebase,git,github,aws&theme=dark" alt="Tools" />
+  </a>
   <img src="https://img.shields.io/badge/n8n-FF6C37?style=for-the-badge&logo=n8n&logoColor=white" alt="n8n">
   <img src="https://img.shields.io/badge/Serverless-FD5750?style=for-the-badge&logo=serverless&logoColor=white" alt="Serverless">
 </p>
@@ -51,11 +65,18 @@ I am a results-driven **Computer Engineering graduate (Cum Laude)** specializing
 
 ---
 
-## 📈 GitHub Stats
+## 📊 Live Moving Activity Graph & Stats
 
-<p align="left">
-  <img src="https://github-readme-stats.vercel.app/api?username=YOUR_GITHUB_USERNAME&show_icons=true&theme=visualstudio&count_private=true" alt="GitHub Stats" height="150" />
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=YOUR_GITHUB_USERNAME&layout=compact&theme=visualstudio" alt="Top Languages" height="150" />
+<!-- Moving Snake Contribution Graph -->
+### My Contribution Snake
+<p align="center">
+  <img src="https://raw.githubusercontent.com/YOUR_GITHUB_USERNAME/YOUR_GITHUB_USERNAME/output/github-contribution-grid-snake.svg" alt="Snake Animation" />
+</p>
+
+### 📈 GitHub Statistics
+<p align="center">
+  <img src="https://github-readme-stats.vercel.app/api?username=YOUR_GITHUB_USERNAME&show_icons=true&theme=radical&count_private=true" alt="GitHub Stats" height="150" />
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=YOUR_GITHUB_USERNAME&layout=compact&theme=radical" alt="Top Languages" height="150" />
 </p>
 
 ---
