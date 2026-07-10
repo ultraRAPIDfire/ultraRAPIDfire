@@ -1,4 +1,4 @@
-# 💻 Full Stack Tech Stack
+# TECH STACK
 
 ### 🎨 Frontend
 
